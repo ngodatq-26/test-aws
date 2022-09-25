@@ -8,17 +8,26 @@ const userSchema = new Schema({
         type : String,
         default : ''
     },
-    phone : Number,
-    date : {
+    phone : {
+        type : Number,
+        default : null
+    },
+    profile_image : {
+        type : String,
+        default : null
+    },
+    created_at : {
         type : Date,
         default : Date.now
     },
-    created_at : Date,
-    updated_at : Date,
+    updated_at : {
+        type: Date,
+        default: Date.now
+    },
 });
 
 userSchema.method = {
-
+    
 };
 
 userSchema.statics = {

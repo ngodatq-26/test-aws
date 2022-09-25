@@ -1,21 +1,24 @@
 const express = require('express');
 const app = express();
-const port = 3000;
-const db = require('./src/config/Connect.Mongo');
-const { User } = require('./src/models/User.Schema');
+const dotenv = require('dotenv').config();
+const createError = require('http-errors');
+const config = require('./src/config/Config.Env')
 
-app.get('/', (req, res) => {
-    console.log(db)
-    res.send('Hello')
-})
+const port = config.APP_PORT;
 
-app.get('/test', async (req, res) => {
-    await User.create({
-        email: "datnq2@hocmai.vn",
-        password: "12345678",
-    })
-    res.send('create successfully');
-})
+app.use(express.json());
+app.use(express.urlencoded({ extended : true}));
+
+//define all router
+const AuthRoute = require('./src/routes/Auth.Router');
+
+//initialize major app
+app.use('/auth', AuthRoute);
+
+//404 handler and pass to error handler
+app.use((req, res, next) => {
+    next(createError(404, 'Not found'));
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

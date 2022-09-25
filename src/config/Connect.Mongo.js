@@ -1,29 +1,21 @@
 const mongoose = require('mongoose');
+const config = require('./Config.Env');
 
-module.exports = (function () {
-    let connectInstance;
-
-    function getInstance() {
-        return new Promise(function (resolve, reject) {
-            if(connectInstance) {
-                console.log("monogoDB is connected")
-                return resolve(connectInstance);
-            }
-
+module.exports = (
+    function () {
+        function connect() {
             const options = {
-                autoIndex : true,
-                maxPoolSize : 10,
-                autoCreate : true
+                autoIndex: true,
+                autoCreate: true,
+                maxPoolSize: 10
             }
 
-            connectInstance = mongoose.connect('mongodb+srv://ngodatq26:ngodatq26@cluster0.cprksny.mongodb.net/nodejs_app?retryWrites=true&w=majority', options, function(error) {
-                console.log("connect error");
-                return reject(error);
-            });
+            //phần này nên chỉnh sửa thanh singleton
+            return mongoose.connect(config.DATABASE_URI, options)
+                .catch(error => {
+                    console.log(error);
+            }) 
+        }
 
-            return resolve(connectInstance);
-        })
-    }
-
-    return getInstance;
+    return connect();
 })();

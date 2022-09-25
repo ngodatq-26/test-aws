@@ -1,11 +1,24 @@
-const { body, checkBody, } = require('express-validator');
+const { body, checkBody, check, } = require('express-validator');
 const expressValidator = require("express-validator");
 
 
-function userRequest(req, user) {
-    req.checkBody("email", "Email is required").notEmpty();
-}
+const validateLogin = () => {
+    return [
+        body('email', 'Email is not empty').not().notEmpty(),
+        body('email', 'Invalid Email!').isEmail(),
+        body('password', 'Password more than 6 degits').isLength({min : 6}),
+    ];
+};
+
+const validateRegister = () => {
+    return [
+        body('email', 'Email is not empty').not().notEmpty(),
+        body('email', 'Invalid Email!').isEmail(),
+        body('password', 'Password more than 6 degits').isLength({ min: 6 })
+    ];
+};
 
 module.exports = {
-    userRequest : userRequest
-}
+    validateLogin : validateLogin,
+    validateRegister : validateRegister
+};

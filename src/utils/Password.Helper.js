@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs');
 
+//mã hóa mật khẩu
 const hashPassword = (password) => {
    return new Promise(function(resolve,reject) {
        bcryptjs.genSalt(10, function (err, salt) {
@@ -13,6 +14,7 @@ const hashPassword = (password) => {
    });
 };
 
+//so sánh mật khẩu đã mã hóa
 const comparePassword = (password, hash) => {
     return new Promise(function(resolve, reject) {
         bcryptjs.compare(password, hash, function (err, res) {

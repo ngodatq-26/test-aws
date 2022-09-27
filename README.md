@@ -9,7 +9,7 @@ ae trước khi dùng nên tìm hiểu qua chút về :
 - MongoDB
 
 1 số thư viện cần quan tâm :
-- jsonwebtoken
+- jsonwebtoken <br>
 - mongoose
 - passport
 - cors

@@ -22,7 +22,7 @@ ae cũng nên tìm hiểu qua chút về mẫu thiết kế như:
 Khi chạy chỉ cần gõ npm i sau đó npm start chạy cổng 3000;
 
 Cấu trúc thư mục (cái này viết kiểu mvc) :
------src---|--api (chứa các api và endpoint)
+-----src---|--api (chứa các api và endpoint) <br>
            |--cli (chứa các command tác vụ chạy ngầm và dùng các cron job)
            |--controllers (chứa các controllers)
            |--middlewares (chứa các js về middlewares)

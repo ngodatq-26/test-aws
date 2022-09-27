@@ -1,7 +1,12 @@
 module.exports = (function() {
     return {
-        login : '/login',
-        register : '/register',
-        logout : '/logout'
+        auth : {
+            login: '/login',
+            register: '/register',
+            logout: '/logout'
+        },
+        user : {
+            all : '/all',
+        }
     }
 })()

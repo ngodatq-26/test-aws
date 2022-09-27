@@ -1,6 +1,8 @@
 const {Schema} = require('mongoose');
 const mongoose = require('mongoose')
+const utils = require('../utils/Constant');
 
+//nên xem xét đổi sang singleton hay không
 const userSchema = new Schema({
     email : String,
     password : String,
@@ -26,15 +28,19 @@ const userSchema = new Schema({
     },
 });
 
+//khai báo các phương thức instance cho userSchema
 userSchema.method = {
     
 };
 
-userSchema.statics = {
+//khai báo các phương thức static cho uerSchema
+userSchema.static('findByEmail', function(email) {
+    return this.find({
+        email : new RegExp(email, 'i')
+    });
+});
 
-};
-
-const User = mongoose.model('users', userSchema)
+const User = mongoose.model(utils.models.users, userSchema);
 
 module.exports = {
     User : User

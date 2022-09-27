@@ -11,9 +11,12 @@ app.use(express.urlencoded({ extended : true}));
 
 //define all router
 const AuthRoute = require('./src/routes/Auth.Router');
+const UserRoute = require('./src/routes/User.Router');
+
 
 //initialize major app
 app.use('/auth', AuthRoute);
+app.use('/user', UserRoute);
 
 //404 handler and pass to error handler
 app.use((req, res, next) => {

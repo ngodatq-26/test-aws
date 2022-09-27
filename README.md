@@ -23,7 +23,7 @@ Khi chạy chỉ cần gõ npm i sau đó npm start chạy cổng 3000; <br>
 
 Cấu trúc thư mục (cái này viết kiểu mvc) :<br>
 -----src---|--api (chứa các api và endpoint) <br>
-&emsp; &emsp;          |--cli (chứa các command tác vụ chạy ngầm và dùng các cron job) <br>
+&emsp; &emsp; &emsp;       |--cli (chứa các command tác vụ chạy ngầm và dùng các cron job) <br>
            |--controllers (chứa các controllers) <br>
            |--middlewares (chứa các js về middlewares) <br>
            |--models (chứa các schema về models database(cái này thì tìm hiểu về mongoose)) <br>

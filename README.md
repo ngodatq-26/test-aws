@@ -24,15 +24,15 @@ Khi chạy chỉ cần gõ npm i sau đó npm start chạy cổng 3000; <br>
 Cấu trúc thư mục (cái này viết kiểu mvc) :<br>
 -----src---|--api (chứa các api và endpoint) <br>
 &emsp; &emsp; &emsp; &nbsp;      |--cli (chứa các command tác vụ chạy ngầm và dùng các cron job) <br>
-           |--controllers (chứa các controllers) <br>
-           |--middlewares (chứa các js về middlewares) <br>
-           |--models (chứa các schema về models database(cái này thì tìm hiểu về mongoose)) <br>
-           |--request (chứa validation các form request trước khi thực hiện controllers) <br>
-           |--resources (chứa images,html,css,js public, nói chung cái này đéo quan tâm lắm vì viết API) <br>
-           |--routes (khai báo các routes liên kết controllers để app sử dụng được) <br>
-           |--services (dịch vụ ngoài, cái này tính có thêm được gì thì thêm,kiểu third party, cors, cache,v....) <br>
-           |--utils (các module dùng chung, ví dụ function dùng chung cho nhiều file) <br>
-           |--storage (lưu trữ ảnh của web) <br>
+&emsp; &emsp; &emsp; &nbsp;           |--controllers (chứa các controllers) <br>
+&emsp; &emsp; &emsp; &nbsp;            |--middlewares (chứa các js về middlewares) <br>
+&emsp; &emsp; &emsp; &nbsp;            |--models (chứa các schema về models database(cái này thì tìm hiểu về mongoose)) <br>
+&emsp; &emsp; &emsp; &nbsp;            |--request (chứa validation các form request trước khi thực hiện controllers) <br>
+&emsp; &emsp; &emsp; &nbsp;            |--resources (chứa images,html,css,js public, nói chung cái này đéo quan tâm lắm vì viết API) <br>
+&emsp; &emsp; &emsp; &nbsp;            |--routes (khai báo các routes liên kết controllers để app sử dụng được) <br>
+&emsp; &emsp; &emsp; &nbsp;            |--services (dịch vụ ngoài, cái này tính có thêm được gì thì thêm,kiểu third party, cors, cache,v....) <br>
+&emsp; &emsp; &emsp; &nbsp;            |--utils (các module dùng chung, ví dụ function dùng chung cho nhiều file) <br>
+&emsp; &emsp; &emsp; &nbsp;            |--storage (lưu trữ ảnh của web) <br>
 -node_modu-|--cái này cút,thư viện thôi <br>
 --services-|--giống services bên trên,định viết theo kiểu microservices nhưng đéo biết làm vì khó vcl. <br>
 --index.js-|--cái này đéo biết thì nghỉ bà nó đi.:)))) <br>

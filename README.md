@@ -19,24 +19,24 @@ ae cũng nên tìm hiểu qua chút về mẫu thiết kế như:
 - singleton pattern
 - factory builder
 
-Khi chạy chỉ cần gõ npm i sau đó npm start chạy cổng 3000;
+Khi chạy chỉ cần gõ npm i sau đó npm start chạy cổng 3000; <br>
 
 Cấu trúc thư mục (cái này viết kiểu mvc) :
 -----src---|--api (chứa các api và endpoint) <br>
-           |--cli (chứa các command tác vụ chạy ngầm và dùng các cron job)
-           |--controllers (chứa các controllers)
-           |--middlewares (chứa các js về middlewares)
-           |--models (chứa các schema về models database(cái này thì tìm hiểu về mongoose))
-           |--request (chứa validation các form request trước khi thực hiện controllers)
-           |--resources (chứa images,html,css,js public, nói chung cái này đéo quan tâm lắm vì viết API)
-           |--routes (khai báo các routes liên kết controllers để app sử dụng được)
-           |--services (dịch vụ ngoài, cái này tính có thêm được gì thì thêm,kiểu third party, cors, cache,v....)
-           |--utils (các module dùng chung, ví dụ function dùng chung cho nhiều file)
-           |--storage (lưu trữ ảnh của web)
--node_modu-|--cái này cút,thư viện thôi
---services-|--giống services bên trên,định viết theo kiểu microservices nhưng đéo biết làm vì khó vcl.
---index.js-|--cái này đéo biết thì nghỉ bà nó đi.:))))
+           |--cli (chứa các command tác vụ chạy ngầm và dùng các cron job) <br>
+           |--controllers (chứa các controllers) <br>
+           |--middlewares (chứa các js về middlewares) <br>
+           |--models (chứa các schema về models database(cái này thì tìm hiểu về mongoose)) <br>
+           |--request (chứa validation các form request trước khi thực hiện controllers) <br>
+           |--resources (chứa images,html,css,js public, nói chung cái này đéo quan tâm lắm vì viết API) <br>
+           |--routes (khai báo các routes liên kết controllers để app sử dụng được) <br>
+           |--services (dịch vụ ngoài, cái này tính có thêm được gì thì thêm,kiểu third party, cors, cache,v....) <br>
+           |--utils (các module dùng chung, ví dụ function dùng chung cho nhiều file) <br>
+           |--storage (lưu trữ ảnh của web) <br>
+-node_modu-|--cái này cút,thư viện thôi <br>
+--services-|--giống services bên trên,định viết theo kiểu microservices nhưng đéo biết làm vì khó vcl. <br>
+--index.js-|--cái này đéo biết thì nghỉ bà nó đi.:)))) <br>
 
-okela ae ,giải thích xong .Có gì ko hiểu thì hỏi.Có thể thư mục bên trên sẽ cải tiến thêm chút.Với lại dm mấy con chó viết code bẩn nhé.thêm coding convention đi.
+okela ae ,giải thích xong .Có gì ko hiểu thì hỏi.Có thể thư mục bên trên sẽ cải tiến thêm chút.Với lại dm mấy con chó viết code bẩn nhé.thêm coding convention đi. <br>
 
-tym <3
+tym <3 <br>

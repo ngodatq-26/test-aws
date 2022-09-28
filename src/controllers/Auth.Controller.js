@@ -2,9 +2,16 @@ const { validationResult } = require("express-validator");
 const { User } = require("../models/User.Schema");
 const { comparePassword, hashPassword } = require("../utils/Password.Helper");
 const db = require('../config/Connect.Mongo');
+const config = require('../config/Config.Env');
+const jwtHelper = require('../middlewares/jwt/Jwt');
+
+const secretKey = config.SECRET_JWT_KEY;
+const accessTokenLife = config.JWT_TIME_LIFE;
+const refeshTokenLife = config.REFRESH_TIME_LIFE;
 
 module.exports = {
-    login: (req, res, next) => {
+    //controller login
+    login: async (req, res, next) => {
         try {
             const errors = validationResult(req);
             if(!errors.isEmpty()) {
@@ -15,9 +22,23 @@ module.exports = {
                 });
             }
 
+            const userData = {
+                email : req.body.email,
+                password : req.body.password
+            }
+
+            const accessToken = await jwtHelper.generateToken(userData, secretKey, accessTokenLife);
+            const refreshToken = await jwtHelper.generateToken(userData, secretKey, refeshTokenLife);
+
             return res.status(200).json({
                 status : 200,
                 message : 'login successfully!!!',
+                data : {
+                    email : req.body.email,
+                    password : req.body.password,
+                    accessToken : accessToken,
+                    refreshToken : refreshToken
+                }
             });
 
         } catch (err) {
@@ -29,6 +50,7 @@ module.exports = {
         }
     },
 
+    //controller register
     register: async (req, res, next) => {
         try {
             const errors = validationResult(req);
@@ -75,6 +97,7 @@ module.exports = {
         }
     },
 
+    //controller logout
     logout: async (req, res, next) => {
 
     }

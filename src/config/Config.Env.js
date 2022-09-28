@@ -10,5 +10,10 @@ module.exports = {
     DATABASE_URI : process.env.DATABASE_URI,
 
     //app_main
-    APP_PORT : process.env.APP_PORT
+    APP_PORT : process.env.APP_PORT,
+
+    //jwt 
+    SECRET_JWT_KEY : process.env.SECRET_JWT_KEY,
+    JWT_TIME_LIFE : process.env.JWT_TIME_LIFE,
+    REFRESH_TIME_LIFE : process.env.REFRESH_TIME_LIFE,
 }

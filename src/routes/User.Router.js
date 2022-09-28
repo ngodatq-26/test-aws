@@ -3,7 +3,9 @@ const router = express.Router();
 const UserController = require('../controllers/User.Controller');
 const api = require('../api/Routes');
 const passport = require('passport');
+const authMiddleware = require('../middlewares/Auth.Middleware');
 
-router.get(api.user.all, passport.authenticate('jwt', {session : false}),UserController.allUsers);
+router.use(authMiddleware.checkJwtMiddleware);
+router.get(api.user.all, UserController.allUsers);
 
 module.exports = router;

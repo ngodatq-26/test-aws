@@ -1,25 +1,42 @@
-const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
-const jwtStrategy = require('passport-jwt').Strategy,
-      ExtractJwt = require('passport-jwt').ExtractJwt;
+const generateToken = (user, secretKey, accessTokenLife) => {
+    return new Promise((resolve, reject) => {
 
-const opts = {}
-
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secret';
-opts.issuer = 'accounts.example.com';
-opts.audience = 'yoursite.net';
-
-passport.use(new jwtStrategy(opts, function(jwt_payload, done) {
-    User.findOne({ id: jwt_payload.sub }, function (err, user) {
-        if (err) {
-            return done(err, false);
+        const userData = {
+            email : user.email,
+            password : user.password
         }
-        if (user) {
-            return done(null, user);
-        } else {
-            return done(null, false);
-            // or you could create a new account
+
+        const payload = {
+            data : userData,
+        };
+        const options = {
+            algorithm : "HS256",
+            expiresIn : accessTokenLife
         }
+
+        jwt.sign(payload, secretKey, options, (error, token) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(token);
+        });
+    })
+}
+
+const verifyToken = (token, secretKey) => {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, secretKey, (error, decoded) => {
+            if(error) {
+                reject(error);
+            } 
+            resolve(decoded);
+        })
     });
-}))
+}
+
+module.exports = {
+    generateToken : generateToken,
+    verifyToken : verifyToken,
+};

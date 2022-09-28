@@ -13,6 +13,7 @@ module.exports = {
     APP_PORT : process.env.APP_PORT,
 
     //jwt 
+    REFRESH_SECRET_JWT_KEY: process.env.REFRESH_SECRET_JWT_KEY,
     SECRET_JWT_KEY : process.env.SECRET_JWT_KEY,
     JWT_TIME_LIFE : process.env.JWT_TIME_LIFE,
     REFRESH_TIME_LIFE : process.env.REFRESH_TIME_LIFE,

@@ -3,7 +3,8 @@ module.exports = (function() {
         auth : {
             login: '/login',
             register: '/register',
-            logout: '/logout'
+            logout: '/logout',
+            refreshToken : '/refresh-token'
         },
         user : {
             all : '/all',

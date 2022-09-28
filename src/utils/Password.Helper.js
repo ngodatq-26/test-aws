@@ -16,17 +16,7 @@ const hashPassword = (password) => {
 
 //so sánh mật khẩu đã mã hóa
 const comparePassword = (password, hash) => {
-    return new Promise(function(resolve, reject) {
-        bcryptjs.compare(password, hash, function (err, res) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(res);
-                console.log(res);
-            };
-        });
-    });
-    
+    return bcryptjs.compareSync(password, hash);
 };
 
 module.exports = {

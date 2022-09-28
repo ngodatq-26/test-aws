@@ -35,9 +35,16 @@ userSchema.method = {
 
 //khai báo các phương thức static cho uerSchema
 userSchema.static('findByEmail', function(email) {
-    return this.find({
+    return this.findOne({
         email : new RegExp(email, 'i')
     });
+});
+
+userSchema.static('findByEmailAndPassword', function(email, password) {
+    return this,this.find({
+        email : new RegExp(email, 'i'),
+        password : password
+    })
 });
 
 const User = mongoose.model(utils.models.users, userSchema);

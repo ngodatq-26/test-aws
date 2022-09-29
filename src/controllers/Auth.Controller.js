@@ -4,6 +4,7 @@ const { comparePassword, hashPassword } = require("../utils/Password.Helper");
 const db = require('../config/Connect.Mongo');
 const config = require('../config/Config.Env');
 const jwtHelper = require('../middlewares/jwt/Jwt');
+const { sendMail } = require('../services/email/SendMail.Services');
 
 const refreshSecretKey = config.REFRESH_SECRET_JWT_KEY;
 const secretKey = config.SECRET_JWT_KEY;
@@ -84,6 +85,8 @@ module.exports = {
 
             //kiểm tra xem email đã được sử dụng hay chưa;
             const email = req.body.email;
+            await sendMail(email);
+            
             const account = await User.findByEmail(req.body.email);
             if(account) {
                 return res.status(400).json({
@@ -92,6 +95,8 @@ module.exports = {
                     data : null
                 })
             }
+
+            
 
             //mã hóa mật khẩu
             hashPassword(req.body.password).then(async (password) => {

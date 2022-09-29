@@ -1,3 +1,5 @@
+const { config } = require('dotenv');
+
 const dotenv = require('dotenv').config();
 
 module.exports = {
@@ -17,4 +19,17 @@ module.exports = {
     SECRET_JWT_KEY : process.env.SECRET_JWT_KEY,
     JWT_TIME_LIFE : process.env.JWT_TIME_LIFE,
     REFRESH_TIME_LIFE : process.env.REFRESH_TIME_LIFE,
+    
+    //mail
+    MAIL_HOST: process.env.MAIL_HOST,
+    MAIL_PORT: process.env.MAIL_PORT,
+    MAIL_USER: process.env.MAIL_USER,
+    MAIL_PASSWORD: process.env.MAIL_HOST,
+    MAIL_SECURE: process.env.MAIL_SECURE,
+
+    //aws_mail
+    AWS_SMTP_ENDPOINT : process.env.AWS_SMTP_ENDPOINT,
+    AWS_PORT : process.env.APP_PORT,
+    AWS_SMTP_USERNAME : process.env.AWS_SMTP_USERNAME,
+    AWS_SMTP_PASSWORD : process.env.AWS_SMTP_PASSWORD,
 }

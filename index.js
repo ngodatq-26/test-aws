@@ -5,17 +5,22 @@ const createError = require('http-errors');
 const config = require('./src/config/Config.Env')
 const route = require('./src/routes/Index.Router');
 const port = config.APP_PORT;
+const path = require('path');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended : true}));
+app.use(express.static(`${__dirname}/src/resources/public`));
 
+app.set('views', `${__dirname}/src/resources/views`);
+app.set('view engine', 'ejs');
 
 //initialize major app
 route(app);
 
+
 //404 handler and pass to error handler
 app.use((req, res, next) => {
-    next(createError(404, 'Not found'));
+    res.status(404).render('404');
 });
 
 app.listen(port, () => {

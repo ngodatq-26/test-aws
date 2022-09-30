@@ -4,7 +4,7 @@ const { comparePassword, hashPassword } = require("../utils/Password.Helper");
 const db = require('../config/Connect.Mongo');
 const config = require('../config/Config.Env');
 const jwtHelper = require('../middlewares/jwt/Jwt');
-const { sendMail } = require('../services/email/SendMail.Services');
+const { sendMail } = require('../services/email/SendMailV2.Services');
 
 const refreshSecretKey = config.REFRESH_SECRET_JWT_KEY;
 const secretKey = config.SECRET_JWT_KEY;
@@ -85,7 +85,6 @@ module.exports = {
 
             //kiểm tra xem email đã được sử dụng hay chưa;
             const email = req.body.email;
-            await sendMail(email);
             
             const account = await User.findByEmail(req.body.email);
             if(account) {
@@ -125,6 +124,7 @@ module.exports = {
             });
  
         } catch (err) {
+            console.log(err)
             return res.status(400).json({
                 status: 400,
                 message: err,

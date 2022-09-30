@@ -13,6 +13,7 @@ module.exports = {
 
     //app_main
     APP_PORT : process.env.APP_PORT,
+    APP_DOMAIN : process.env.APP_DOMAIN,
 
     //jwt 
     REFRESH_SECRET_JWT_KEY: process.env.REFRESH_SECRET_JWT_KEY,
@@ -32,4 +33,11 @@ module.exports = {
     AWS_PORT : process.env.APP_PORT,
     AWS_SMTP_USERNAME : process.env.AWS_SMTP_USERNAME,
     AWS_SMTP_PASSWORD : process.env.AWS_SMTP_PASSWORD,
+    SES_AWS_ACCESS_KEY_ID : process.env.SES_AWS_ACCESS_KEY_ID,
+    SES_AWS_SECRET_ACCESS_KEY : process.env.SES_AWS_SECRET_ACCESS_KEY,
+    SES_REGION : process.env.SES_REGION,
+
+    //google
+    GOOGLE_CLIENT_ID : process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET : process.env.GOOGLE_CLIENT_SECRET,
 }

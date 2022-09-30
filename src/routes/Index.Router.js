@@ -4,10 +4,12 @@ const app = express();
 //get all define routes
 const AuthRoute = require('./Auth.Router');
 const UserRoute = require('./User.Router');
+const OAuth2Route = require('./OAuth2.Router');
 
 function route(app) {
     app.use('/api/auth', AuthRoute);
     app.use('/api/user', UserRoute);
+    app.use('/api/oauth2', OAuth2Route);
 }
 
 module.exports = route;

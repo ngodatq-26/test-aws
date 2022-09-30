@@ -6,6 +6,7 @@ const config = require('./src/config/Config.Env')
 const route = require('./src/routes/Index.Router');
 const port = config.APP_PORT;
 const path = require('path');
+const passportGoogle = require('./src/services/passport/Google.Passport');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended : true}));

@@ -8,6 +8,10 @@ module.exports = (function() {
         },
         user : {
             all : '/all',
+        },
+        oauth : {
+            loginGoole : '/google',
+            callbackGoogle : '/google/callback'
         }
     }
 })()

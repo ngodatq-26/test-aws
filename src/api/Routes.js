@@ -12,6 +12,13 @@ module.exports = (function() {
         oauth : {
             loginGoole : '/google',
             callbackGoogle : '/google/callback'
+        },
+        recipe: {
+            all: '/all',
+            get: '/get',
+            update: '/update',
+            delete: '/delete',
+            create: '/create',
         }
     }
 })()

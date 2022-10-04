@@ -1,5 +1,6 @@
 const {Schema} = require('mongoose');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { user } = require('../api/Routes');
 const utils = require('../utils/Constant');
 
 //nên xem xét đổi sang singleton hay không
@@ -34,17 +35,36 @@ userSchema.method = {
 };
 
 //khai báo các phương thức static cho uerSchema
+//tìm kiếm tài khoản bằng email
 userSchema.static('findByEmail', function(email) {
     return this.findOne({
         email : new RegExp(email, 'i')
     });
 });
 
+//tìm kiếm tài khoản bởi email và password
 userSchema.static('findByEmailAndPassword', function(email, password) {
-    return this,this.find({
+    return this.find({
         email : new RegExp(email, 'i'),
         password : password
     })
+});
+
+//tìm kiếm tất cả ObjectId
+userSchema.static('findAllObjectId', async function() {
+    const arrObjectId = new Array();
+    const allUser = await this.find({});
+
+    for (let [key, value] of Object.entries(allUser)) {
+        arrObjectId.push(value.id);
+    }
+    return arrObjectId;
+    
+});
+
+//tìm kiếm tài khoản bằng ObjectId
+userSchema.static('findUserByObjectId', async function(ObjectId) {
+    return this.findById(mongoose.Types.ObjectId(ObjectId))
 });
 
 const User = mongoose.model(utils.models.users, userSchema);

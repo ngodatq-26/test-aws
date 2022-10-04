@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
+const { recipe } = require('../api/Routes');
 const utils = require('../utils/Constant');
 
 const cookingMethods = ["baking", "braising", "canning", "frying",  "grill"];
@@ -88,16 +89,30 @@ recipeSchema.method = {
 };
 
 // STATIC
-// recipeSchema.static('byCategory', function(category) {
-// 	return this.find({
-// 		category: new RegExp(category.id),
-// 	});
-// }) 
-recipeSchema.static('getOne', async function(ObjectId) {
-    return this.findById(mongoose.Types.ObjectId(ObjectId.trim()));
+recipeSchema.static('getAll', async function() {
+	return this.find();
 });
 
-const Recipe = mongoose.model(utils.models.recipes, recipeSchema);
+recipeSchema.static('getOne', async function(ObjectId) {
+    return this.findById(mongoose.Types.ObjectId(ObjectId));
+});
+
+// recipeSchema.static('createOne', async function(attrs) {
+// 	if (attrs.name) {
+
+// 	}
+// 	return await this.create(attributes);
+// });
+
+recipeSchema.static('updateOne', async function(ObjectId, update) {
+    return await this.findByIdAndUpdate(mongoose.Types.ObjectId(ObjectId), update, { new: true });
+});
+
+recipeSchema.static('deleteOne', async function(ObjectId) {
+    return await this.findByIdAndDelete(mongoose.Types.ObjectId(ObjectId));
+});
+
+const Recipe = mongoose.model(utils.models.recipe, recipeSchema);
 
 module.exports = {
 	Recipe: Recipe,

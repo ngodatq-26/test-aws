@@ -14,11 +14,25 @@ module.exports = (function() {
             callbackGoogle : '/google/callback'
         },
         recipe: {
-            all: '/',
+            getAll: '',
             getOne: '/:id',
             updateOne: '/:id',
             deleteOne: '/:id',
-            createOne: '/',
+            createOne: '',
+        },
+        dinner : {
+            getAll : '',
+            getOne : '/:id',
+            createOne : '',
+            updateOne : '/:id',
+            deleteOne : '/:id'
+        },
+        tool: {
+            getAll: '',
+            getOne: '/:id',
+            updateOne: '/:id',
+            deleteOne: '/:id',
+            createOne: '',
         }
     }
 })()

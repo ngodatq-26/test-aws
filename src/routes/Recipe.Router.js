@@ -7,10 +7,10 @@ const authMiddleware = require('../middlewares/Auth.Middleware');
 const recipeRequest = require('../request/Recipe.Request');
 
 // router.use(authMiddleware.checkJwtMiddleware);
-router.get(api.recipe.all, RecipeController.all);
-router.post(api.recipe.createOne, RecipeController.createOne);
-router.get(api.recipe.getOne, RecipeController.getOne);
-router.put(api.recipe.updateOne, RecipeController.updateOne);
+router.get(api.recipe.getAll, RecipeController.get);
+router.get(api.recipe.getOne, RecipeController.get);
+router.post(api.recipe.createOne, recipeRequest.validateCreate(), RecipeController.createOne);
+router.put(api.recipe.updateOne, recipeRequest.validateUpdate(), RecipeController.updateOne);
 router.delete(api.recipe.deleteOne, RecipeController.deleteOne);
 
 module.exports = router;

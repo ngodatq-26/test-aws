@@ -25,6 +25,35 @@ const dinnerSchema = new Schema({
         type: Date,
         default: Date.now
     },
-})
+});
 
-const Dinner = mongoose.models(utils.models.dinner, dinnerSchema);
+dinnerSchema.static('getAllDinner', async function() {
+    return await this.find();
+});
+
+dinnerSchema.static('getOneDinner', async function(ObjectId) {
+    return this.findById(mongoose.Types.ObjectId(ObjectId.trim()));
+});
+
+dinnerSchema.static('saveNewDinner', async function (title, listdinner, author) {
+    const Dinner = new this({
+        title : title,
+        listdinner : listdinner,
+        author : mongoose.Types.ObjectId(author.trim())
+    });
+    Dinner.save();
+});
+
+dinnerSchema.static('updateOneDinner', async function(ObjectId, update) {
+    return await this.findByIdAndUpdate(mongoose.Types.ObjectId(ObjectId), update);
+});
+
+dinnerSchema.static('deleteOneDinner', async function(ObjectId) {
+    return await this.findByIdAndRemove(mongoose.Types.ObjectId(ObjectId));
+});
+
+const Dinner = mongoose.model(utils.models.dinner, dinnerSchema);
+
+module.exports = {
+    Dinner : Dinner
+}

@@ -13,6 +13,13 @@ module.exports = (function() {
             loginGoole : '/google',
             callbackGoogle : '/google/callback'
         },
+        recipe: {
+            all: '/',
+            get: '/:id',
+            update: '/:id',
+            delete: '/:id',
+            create: '/',
+        },
         dinner : {
             getAll : '',
             getOne : '/:id',

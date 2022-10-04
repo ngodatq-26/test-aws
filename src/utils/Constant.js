@@ -3,6 +3,7 @@ module.exports = (
         return {
             models : {
                 users :  'users',
+                recipes: 'recipes',
                 dinner : 'dinner',
             }
         }

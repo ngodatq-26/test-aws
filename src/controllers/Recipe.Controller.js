@@ -8,7 +8,7 @@ module.exports = {
 			const recipes = await Recipe.find({});
 			return res.status(200).json({
 				status: 200,
-				message: 'successfully',
+				message: 'got all',
 				data: recipes,
 			})
 		} catch(err) {
@@ -23,15 +23,6 @@ module.exports = {
 
 	create: async (req, res, next) => {
 		try {
-			const errors = validationResult(req);
-			if (!errors.isEmpty()) {
-				return res.status(400).json({
-					status: 400,
-					message: errors.array(),
-					data: null,
-				});
-			}
-
 			const recipe = new Recipe({
 				name: req.body.name,
 			});
@@ -56,22 +47,30 @@ module.exports = {
 
 	get: async(req, res, next) => {
 		try {
-			const errors = validationResult(req);
-			if (!errors.isEmpty()) {
+			// const errors = validationResult(req);
+			// if (!errors.isEmpty()) {
+			// 	return res.status(400).json({
+			// 		status: 400,
+			// 		message: errors.array(),
+			// 		data: null,
+			// 	});
+			// }
+
+			const id = req.params.id;
+
+			const recipe = await Recipe.findById(id);
+
+			if (!recipe) {
 				return res.status(400).json({
 					status: 400,
-					message: errors.array(),
+					message: 'Recipe not found',
 					data: null,
 				});
 			}
 
-			const id = req.body.id;
-
-			const recipe = await Recipe.findById(id);
-
 			return res.status(200).json({
 				status: 200,
-				message: 'found successfully',
+				message: 'found',
 				data: {
 					recipe: recipe,
 				},
@@ -85,38 +84,89 @@ module.exports = {
 		}
 	},
 
-	// update: async(req, res, next) => {
-	// 	try {
-	// 		const errors = validationResult(req);
-	// 		if (!errors.isEmpty()) {
-	// 			return res.status(400).json({
-	// 				status: 400,
-	// 				message: errors.array(),
-	// 				data: null,
-	// 			});
-	// 		}
+	update: async(req, res, next) => {
+		try {
+			// const errors = validationResult(req);
+			// if (!errors.isEmpty()) {
+			// 	return res.status(400).json({
+			// 		status: 400,
+			// 		message: errors.array(),
+			// 		data: null,
+			// 	});
+			// }
 
-	// 		const id = req.body.id;
+			const id = req.params.id;
 
-	// 		const recipe = await Recipe.findById(id);
+			const recipe = await Recipe.findById(id);
 
-	// 		recipe.name = req.body.name;
+			if (!recipe) {
+				return res.status(400).json({
+					status: 400,
+					message: 'Recipe not found',
+					data: null,
+				});
+			}
 
-	// 		await recipe.save();
+			if (req.body.name) {
+				recipe.name = req.body.name;
+			}
 
-	// 		return res.status(200).json({
-	// 			status: 200,
-	// 			message: 'updated successfully',
-	// 			data: {
-	// 				recipe: recipe,
-	// 			},
-	// 		});
-	// 	} catch(err) {
-	// 		return res.status(400).json({
-    //             status: 400,
-    //             message: err,
-    //             data: null,
-    //         });
-	// 	}
-	// },
+			await recipe.save();
+
+			return res.status(200).json({
+				status: 200,
+				message: 'updated successfully',
+				data: {
+					recipe: recipe,
+				},
+			});
+		} catch(err) {
+			return res.status(400).json({
+                status: 400,
+                message: err,
+                data: null,
+            });
+		}
+	},
+
+	delete: async (req, res, next) => {
+		try {
+			// const errors = validationResult(req);
+			// if (!errors.isEmpty()) {
+			// 	return res.status(400).json({
+			// 		status: 400,
+			// 		message: errors.array(),
+			// 		data: null,
+			// 	});
+			// }
+
+			const id = req.params.id;
+
+			const recipe = await Recipe.findById(id);
+
+			if (!recipe) {
+				return res.status(400).json({
+					status: 400,
+					message: 'Recipe not found',
+					data: null,
+				});
+			}
+
+			await recipe.delete();
+
+			return res.status(200).json({
+				status: 200,
+				message: 'Deleted successfully',
+				data: {
+					recipe: recipe,
+				},
+			});
+		} catch(err) {
+			return res.status(400).json({
+                status: 400,
+                message: err,
+                data: null,
+            });
+		}
+	}
 }

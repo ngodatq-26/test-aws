@@ -19,7 +19,7 @@ module.exports = {
                         next();
 
                     } catch (err) {
-                        
+                        console.log(err);
                         return res.status(401).send({
                             status : 401,
                             message : "Unauthorized",

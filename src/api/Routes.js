@@ -19,6 +19,13 @@ module.exports = (function() {
             update: '/:id',
             delete: '/:id',
             create: '/',
+        },
+        dinner : {
+            getAll : '',
+            getOne : '/:id',
+            createOne : '',
+            updateOne : '/:id',
+            deleteOne : '/:id'
         }
     }
 })()

@@ -87,6 +87,7 @@ module.exports = {
             const email = req.body.email;
             
             const account = await User.findByEmail(req.body.email);
+            
             if(account) {
                 return res.status(400).json({
                     status : 400,

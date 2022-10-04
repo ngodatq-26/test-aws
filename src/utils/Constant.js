@@ -4,6 +4,7 @@ module.exports = (
             models : {
                 users :  'users',
                 recipes: 'recipes',
+                dinner : 'dinner',
             }
         }
     }

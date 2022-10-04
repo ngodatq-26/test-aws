@@ -93,6 +93,9 @@ recipeSchema.method = {
 // 		category: new RegExp(category.id),
 // 	});
 // }) 
+recipeSchema.static('getOne', async function(ObjectId) {
+    return this.findById(mongoose.Types.ObjectId(ObjectId.trim()));
+});
 
 const Recipe = mongoose.model(utils.models.recipes, recipeSchema);
 

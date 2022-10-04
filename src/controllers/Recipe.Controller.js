@@ -1,5 +1,5 @@
 const { Recipe } = require('../models/Recipe.Schema');
-const { validationResult } = require("express-validator");
+const { validationResult } = require("express-validator")
 // const config = require('../config/Config.Env');
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 		}
 	},
 
-	create: async (req, res, next) => {
+	createOne: async (req, res, next) => {
 		try {
 			const recipe = new Recipe({
 				name: req.body.name,
@@ -45,16 +45,12 @@ module.exports = {
 		}
 	},
 
-	get: async(req, res, next) => {
+	getOne: async(req, res, next) => {
 		try {
-			// const errors = validationResult(req);
-			// if (!errors.isEmpty()) {
-			// 	return res.status(400).json({
-			// 		status: 400,
-			// 		message: errors.array(),
-			// 		data: null,
-			// 	});
-			// }
+			const errors = validationResult(req);
+            if(!errors.isEmpty()) {
+                return res.status(400).json(HandleResponse(400, errors.array(), null));
+            }
 
 			const id = req.params.id;
 
@@ -84,7 +80,7 @@ module.exports = {
 		}
 	},
 
-	update: async(req, res, next) => {
+	updateOne: async(req, res, next) => {
 		try {
 			// const errors = validationResult(req);
 			// if (!errors.isEmpty()) {
@@ -129,16 +125,16 @@ module.exports = {
 		}
 	},
 
-	delete: async (req, res, next) => {
+	deleteOne: async (req, res, next) => {
 		try {
-			// const errors = validationResult(req);
-			// if (!errors.isEmpty()) {
-			// 	return res.status(400).json({
-			// 		status: 400,
-			// 		message: errors.array(),
-			// 		data: null,
-			// 	});
-			// }
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return res.status(400).json({
+					status: 400,
+					message: errors.array(),
+					data: null,
+				});
+			}
 
 			const id = req.params.id;
 

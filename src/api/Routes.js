@@ -15,10 +15,10 @@ module.exports = (function() {
         },
         recipe: {
             all: '/',
-            get: '/:id',
-            update: '/:id',
-            delete: '/:id',
-            create: '/',
+            getOne: '/:id',
+            updateOne: '/:id',
+            deleteOne: '/:id',
+            createOne: '/',
         }
     }
 })()

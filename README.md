@@ -40,3 +40,4 @@ Cấu trúc thư mục (cái này viết kiểu mvc) :<br>
 okela ae ,giải thích xong .Có gì ko hiểu thì hỏi.Có thể thư mục bên trên sẽ cải tiến thêm chút.Với lại dm mấy con chó viết code bẩn nhé.thêm coding convention đi. <br>
 
 tym <3 <br>
+AE kết nối DB = DB_uri

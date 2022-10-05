@@ -2,9 +2,9 @@ const { Tool } = require('../models/Tool.Schema');
 const { validationResult } = require('express-validator');
 
 module.exports = {
-	getAll: (req, res, next) => {
+	getAll: async (req, res, next) => {
 		try {
-			const tools = Tool.getAll();
+			const tools = await Tool.getAll();
 			return res.status(200).json({
 				status: 200,
 				message: 'Got all',
@@ -12,17 +12,17 @@ module.exports = {
 			});
 		} catch(err) {
 			return res.status(400).json({
-				status: 200,
+				status: 400,
 				message: err,
 				data: null,
 			});
 		}
 	},
 
-	getOne: (req, res, next) => {
+	getOne: async (req, res, next) => {
 		try {
 			const id = req.params.id;
-			const tool = Tool.getOne(id);
+			const tool = await Tool.getOne(id);
 
 			if (!tool) {
 				return res.status(400).json({
@@ -39,7 +39,7 @@ module.exports = {
 			});
 		} catch(err) {
 			return res.status(400).json({
-				status: 200,
+				status: 400,
 				message: err,
 				data: null,
 			});
@@ -48,11 +48,18 @@ module.exports = {
 
 	createOne: async (req, res, next) => {
 		try {
-			const tool = new Tool({
-				name: req.body.name,
-			});
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return res.status(400).json({
+					status: 400,
+					message: errors.array(),
+					data: null,
+				});
+			}
 
+			const tool = new Tool(req.body);
 			await tool.save();
+
 			return res.status(200).json({
 				status: 200,
 				message: 'Created successfully',
@@ -60,7 +67,7 @@ module.exports = {
 			});
 		} catch(err) {
 			return res.status(400).json({
-				status: 200,
+				status: 400,
 				message: err,
 				data: null,
 			});
@@ -69,23 +76,23 @@ module.exports = {
 
 	updateOne: async (req, res, next) => {
 		try {
-			// const errors = validationResult(req);
-			// if (!errors.isEmpty()) {
-			// 	return res.status(400).json({
-			// 		status: 400,
-			// 		message: errors.array(),
-			// 		data: null,
-			// 	});
-			// }
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return res.status(400).json({
+					status: 400,
+					message: errors.array(),
+					data: null,
+				});
+			}
 
 			const id = req.params.id;
-			const tool = Tool.updateOne(id, req.body);
+			const tool = await Tool.updateOne(id, req.body);
 
 			return res.status(200).json({
 				status: 200,
 				message: 'Updated successfully',
 				data: {
-					recipe: tool,
+					tool: tool,
 				},
 			});
 		} catch(err) {
@@ -97,25 +104,25 @@ module.exports = {
 		}
 	},
 
-	deleteOne: (req, res, next) => {
+	deleteOne: async (req, res, next) => {
 		try {
-			// const errors = validationResult(req);
-			// if (!errors.isEmpty()) {
-			// 	return res.status(400).json({
-			// 		status: 400,
-			// 		message: errors.array(),
-			// 		data: null,
-			// 	});
-			// }
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return res.status(400).json({
+					status: 400,
+					message: errors.array(),
+					data: null,
+				});
+			}
 
 			const id = req.params.id;
-			const tool = Recipe.deleteOne(id);
+			const tool = await Tool.deleteOne(id);
 			
 			return res.status(200).json({
 				status: 200,
 				message: 'Deleted successfully',
 				data: {
-					recipe: tool,
+					tool: tool,
 				},
 			});
 		} catch(err) {

@@ -7,7 +7,7 @@ const toolSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	title: String,
+	content: String,
 	listtool: [
 		{
 			name: String,
@@ -24,15 +24,15 @@ const toolSchema = new Schema({
 
 // STATIC
 toolSchema.static('getAll', async function() {
-	return await this.find({});
+	return await this.find();
 });
 
 toolSchema.static('getOne', async function(id) {
-	return await this.findOne(mongoose.Types.ObjectId(id));
+	return await this.findById(mongoose.Types.ObjectId(id));
 });
 
 toolSchema.static('updateOne', async function(id, update) {
-	return await this.findByIdAndUpdate(mongoose.Types.ObjectId(id), update);
+	return await this.findByIdAndUpdate(mongoose.Types.ObjectId(id), update, { new: true });
 });
 
 toolSchema.static('deleteOne', async function(id) {

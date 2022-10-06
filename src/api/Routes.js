@@ -33,6 +33,13 @@ module.exports = (function() {
             updateOne: '/:id',
             deleteOne: '/:id',
             createOne: '',
+        },
+        news: {
+            getAll: '',
+            getOne: '/:id',
+            updateOne: '/:id',
+            deleteOne: '/:id',
+            createOne: '',
         }
     }
 })()

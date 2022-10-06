@@ -1,0 +1,43 @@
+[{
+  "_id": {
+    "$oid": "633481b58f3a1b079d6e6239"
+  },
+  "name": "công thức nấu bánh ngọt",
+  "country": [
+    "Pháp"
+  ],
+  "picture": [
+    "local/image.png"
+  ],
+  "meal": "noon",
+  "dificulty": "easy",
+  "time": {
+    "preptime": 15,
+    "cooktime": 105,
+    "yields": "35-40"
+  },
+  "calories": 250,
+  "method": "fry",
+  "ingredients": [
+    {
+      "name": "flavor",
+      "amount": 250,
+      "unit": "gram"
+    }
+  ],
+  "description": ".....",
+  "categories": [
+    "Breakfast recipes",
+    "Side-dish recipes"
+  ],
+  "video": "local/video.mp3",
+  "step": [
+    {
+      "text": "bắt đầu",
+      "image": "local/step/image0.png"
+    }
+  ],
+  "author": {
+    "$oid": "6334a5008f3a1b079d6e624e"
+  }
+}]

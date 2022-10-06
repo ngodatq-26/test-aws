@@ -6,6 +6,7 @@ module.exports = (
                 recipe: 'recipes',
                 tool : 'tools',
                 dinner : 'dinner',
+                news : 'news',
             }
         }
     }

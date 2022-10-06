@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "633015daac3916510842c1a0"
+  },
+  "email": "123@gmail.com",
+  "password": "$2a$10$bvALOnQMTIxu4OddDg8dHOmiuBqTPT.0rjiaO6NQlr7txx.bimFO2",
+  "name": "",
+  "phone": null,
+  "profile_image": null,
+  "created_at": {
+    "$date": {
+      "$numberLong": "1664095706878"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1664095706878"
+    }
+  },
+  "__v": 0,
+  "mark": [
+    {
+      "$oid": "6334ad2e82cf01a4a434af31"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "63333f557a0a7bf7a04d30c7"
+  },
+  "email": "doan.du@mail.com",
+  "password": "$2a$10$n/UEqLVe.pZPDgo4GdVyt.xGxPbWlY3gDxRr.f5dzzcfU/rfkpLR.",
+  "name": "",
+  "phone": null,
+  "profile_image": null,
+  "created_at": {
+    "$date": {
+      "$numberLong": "1664302933235"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1664302933235"
+    }
+  },
+  "__v": 0,
+  "mark": [
+    ""
+  ]
+}]

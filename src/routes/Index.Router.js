@@ -8,6 +8,7 @@ const OAuth2Route = require('./OAuth2.Router');
 const RecipeRoute = require('./Recipe.Router');
 const DinnerRoute = require('./Dinner.Router');
 const ToolRoute = require('./Tool.Router');
+const NewsRoute = require('./News.Router');
 
 function route(app) {
     app.use('/api/auth', AuthRoute);
@@ -16,6 +17,7 @@ function route(app) {
     app.use('/api/recipe', RecipeRoute);
     app.use('/api/dinner', DinnerRoute);
     app.use('/api/tool', ToolRoute);
+    app.use('/api/news', NewsRoute);
 }
 
 module.exports = route;

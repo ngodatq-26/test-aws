@@ -90,11 +90,11 @@ recipeSchema.method = {
 
 // STATIC
 recipeSchema.static('getAll', async function() {
-	return this.find();
+	return await this.find();
 });
 
 recipeSchema.static('getOne', async function(ObjectId) {
-    return this.findById(mongoose.Types.ObjectId(ObjectId));
+    return await this.findById(mongoose.Types.ObjectId(ObjectId));
 });
 
 // recipeSchema.static('createOne', async function(attrs) {

@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "6334ab1882cf01a4a434af2c"
+  },
+  "title": "top best chicken for christmast",
+  "listdinner": [
+    {
+      "name": "chicken fly",
+      "picture": "local/image.png",
+      "description": "good"
+    }
+  ],
+  "author": {
+    "$oid": "6334ab9582cf01a4a434af2d"
+  }
+}]

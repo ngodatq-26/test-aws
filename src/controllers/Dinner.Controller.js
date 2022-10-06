@@ -18,14 +18,17 @@ module.exports = {
                 return res.status(200).json(HandleResponse(200, 'Get dinner successfully!', dinner))
             };
 
+
             //nếu không có thì là lấy tất cả 
-            const dinners = await Dinner.getAllDinner();
+            console.log(req.body.limit)
+            const dinners = await Dinner.getAllDinner(req.body.skip, req.body.limit, req.body.author);
 
             return res.status(200).json(HandleResponse(200, 'Get all dinners successfully!', dinners))
         } 
         
         catch (error) {
-            return res.status(400).json(HandleResponse(200, error, 'Error in getting dinner'));
+            console.log(error)
+            return res.status(400).json(HandleResponse(400, error, 'Error in getting dinner'));
         };
     },
     

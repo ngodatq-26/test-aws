@@ -25,7 +25,14 @@ module.exports = (function() {
             getOne : '/:id',
             createOne : '',
             updateOne : '/:id',
-            deleteOne : '/:id'
+            delete : ''
+        },
+        book : {
+            getAll : '',
+            getOne : '/:id',
+            createOne : '',
+            updateOne : '/:id',
+            delete : ''
         }
     }
 })()

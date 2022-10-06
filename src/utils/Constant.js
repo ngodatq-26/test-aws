@@ -5,6 +5,7 @@ module.exports = (
                 users :  'users',
                 recipes: 'recipes',
                 dinner : 'dinner',
+                books : 'book',
             }
         }
     }

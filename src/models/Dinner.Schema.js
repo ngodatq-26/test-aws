@@ -27,8 +27,12 @@ const dinnerSchema = new Schema({
     },
 });
 
-dinnerSchema.static('getAllDinner', async function() {
-    return await this.find();
+dinnerSchema.static('getAllDinner', async function(skip, limit, author) {
+    if(!author) {
+        return await this.find().limit(limit).skip(skip);
+    } else return await this.find({
+        author : mongoose.Types.ObjectId(author.trim())
+    }).limit(limit).skip(skip);
 });
 
 dinnerSchema.static('getOneDinner', async function(ObjectId) {

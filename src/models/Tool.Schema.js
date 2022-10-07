@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const utils = require('../utils/Constant');
 
 const toolSchema = new Schema({
-	name: {
+	title: {
 		type: String,
 		required: true,
 	},
 	content: String,
-	listtool: [
+	tool_list: [
 		{
 			name: String,
 			picture: String,
@@ -17,7 +17,7 @@ const toolSchema = new Schema({
 			cons: String,
 		}
 	],
-	author: {
+	author_id: {
 		type: Schema.Types.ObjectId,
 	},
 });

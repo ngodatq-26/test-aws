@@ -21,7 +21,7 @@ module.exports = {
 
             //nếu không có thì là lấy tất cả 
             console.log(req.body.limit)
-            const dinners = await Dinner.getAllDinner(req.body.skip, req.body.limit, req.body.author);
+            const dinners = await Dinner.getAllDinner(req.body.skip, req.body.limit, req.body._id);
 
             return res.status(200).json(HandleResponse(200, 'Get all dinners successfully!', dinners))
         } 
@@ -43,10 +43,10 @@ module.exports = {
             const dataRequest = {
                 title: req.body.title,
                 listdinner: req.body.listdinner,
-                author: req.body.author
+                author_id: req.body.author_id
             };
 
-            await Dinner.saveNewDinner(req.body.title, req.body.listdinner, req.body.author);
+            await Dinner.saveNewDinner(req.body.title, req.body.listdinner, req.body.author_id);
             return res.status(200).json(HandleResponse(200, 'Create one successfully', dataRequest)); 
         } 
         catch (error) {

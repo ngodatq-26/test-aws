@@ -3,13 +3,13 @@
     "$oid": "633481b58f3a1b079d6e6239"
   },
   "name": "công thức nấu bánh ngọt",
-  "country": [
+  "countries": [
     "Pháp"
   ],
-  "picture": [
+  "pictures": [
     "local/image.png"
   ],
-  "meal": "noon",
+  "meals": ["noon"],
   "dificulty": "easy",
   "time": {
     "preptime": 15,
@@ -26,7 +26,7 @@
     }
   ],
   "description": ".....",
-  "categories": [
+  "category_ids": [
     "Breakfast recipes",
     "Side-dish recipes"
   ],
@@ -37,7 +37,7 @@
       "image": "local/step/image0.png"
     }
   ],
-  "author": {
+  "author_id": {
     "$oid": "6334a5008f3a1b079d6e624e"
   }
 }]

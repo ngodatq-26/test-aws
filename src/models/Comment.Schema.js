@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const utils = require('../utils/Constant');
 
 const commentSchema = new Schema({
-	user: Schema.Types.ObjectId,
+	user_id: Schema.Types.ObjectId,
 	content: String,
 	pictures: [ String ],
-	parent: {
+	parent_id: {
 		type: Schema.Types.ObjectId,
 		default: null,
 	},
-	object: Schema.Types.ObjectId,
+	object_id: Schema.Types.ObjectId,
 });
 
 // STATIC

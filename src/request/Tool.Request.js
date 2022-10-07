@@ -3,7 +3,7 @@ const expressValidator = require('express-validator');
 const { Tool } = require('../models/Tool.Schema');
 
 const validateAttributes = [
-	body('name', 'Name is empty').not().notEmpty(),
+	body('title', 'Title is empty').not().notEmpty(),
 ];
 
 const validateId = [

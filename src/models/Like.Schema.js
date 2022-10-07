@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const utils = require('../utils/Constant');
 
 const likeSchema = new Schema({
-	user: Schema.Types.ObjectId,
-	object: Schema.Types.ObjectId,
+	user_id: Schema.Types.ObjectId,
+	object_id: Schema.Types.ObjectId,
 });
 
 // STATIC

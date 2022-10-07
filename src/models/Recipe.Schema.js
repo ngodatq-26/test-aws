@@ -12,10 +12,10 @@ const recipeSchema = new Schema ({
 		type: String,
 		required: true,
 	},
-	country: [String],
-	picture: [String],
+	countries: [String],
+	pictures: [String],
 	video: String,
-	meal: {
+	meals: {
 		type: [{
 			type: String,
 			enum: meals,
@@ -58,7 +58,7 @@ const recipeSchema = new Schema ({
 		amount: Number,
 		unit: String,
 	}],
-	categories: [
+	category_ids: [
 		{
 			type: Schema.Types.ObjectId,
 		}
@@ -70,7 +70,7 @@ const recipeSchema = new Schema ({
 			image: String,
 		}
 	],
-	author: {
+	author_id: {
 		type: Schema.Types.ObjectId,
 		// required: true,
 	},

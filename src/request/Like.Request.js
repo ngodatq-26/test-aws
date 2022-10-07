@@ -3,7 +3,7 @@ const expressValidator = require('express-validator');
 const { Like } = require('../models/Like.Schema');
 
 const validateAttributes = [
-	body('user', 'User is empty').not().notEmpty(),
+	body('user_id', 'User ID is empty').not().notEmpty(),
 ];
 
 const validateId = [

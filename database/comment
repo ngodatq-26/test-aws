@@ -2,14 +2,13 @@
   "_id": {
     "$oid": "63349aa58f3a1b079d6e6245"
   },
-  "user": {
+  "user_id": {
     "$oid": "633015daac3916510842c1a0"
   },
-  "text": "good !!!!",
-  "picture": [
+  "content": "good !!!!",
+  "pictures": [
     "local/image.png"
   ],
-  "linkto": {
-    "$oid": "6334a0fe8f3a1b079d6e624a"
-  }
+  "object_id": "6334a0fe8f3a1b079d6e624a",
+  "parent_id": "6334a0fe8f3a1b079d6e624a"
 }]

@@ -7,7 +7,7 @@ const bookSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	booklist: [
+	book_list: [
 		{
 			name: String,
 			discription: String,
@@ -20,7 +20,7 @@ const bookSchema = new Schema({
 			},
 		}
 	],
-	author: Schema.Types.ObjectId,
+	author_id: Schema.Types.ObjectId,
 });
 
 // STATIC

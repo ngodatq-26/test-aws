@@ -3,7 +3,7 @@
     "$oid": "6334a5fe8f3a1b079d6e624f"
   },
   "title": "top 2 best chicken book",
-  "booklist": [
+  "book_list": [
     {
       "name": "doremon",
       "description": "very cuon",
@@ -18,7 +18,5 @@
       "rate": 3.6
     }
   ],
-  "author": {
-    "$oid": "6334a6f58f3a1b079d6e6250"
-  }
+  "author_id":  "6334a6f58f3a1b079d6e6250"
 }]

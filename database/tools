@@ -3,7 +3,7 @@
     "$oid": "6334a77f8f3a1b079d6e6251"
   },
   "title": "The best may xay",
-  "listtool": [
+  "tool_list": [
     {
       "name": "may xay sinh to Winmart",
       "picture": "local/image",
@@ -12,7 +12,8 @@
       "cons": "nhược điểm"
     }
   ],
-  "author": {
+  "content": "",
+  "author_id": {
     "$oid": "6334a83a8f3a1b079d6e6252"
   }
 }]

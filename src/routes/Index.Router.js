@@ -9,6 +9,10 @@ const RecipeRoute = require('./Recipe.Router');
 const DinnerRoute = require('./Dinner.Router');
 const ToolRoute = require('./Tool.Router');
 const NewsRoute = require('./News.Router');
+const BookRoute = require('./Book.Router');
+// const LikeRoute = require('./Like.Router');
+// const CommentRoute = require('./Comment.Router');
+// const AboutRoute = require('./About.Router');
 
 function route(app) {
     app.use('/api/auth', AuthRoute);
@@ -18,6 +22,10 @@ function route(app) {
     app.use('/api/dinner', DinnerRoute);
     app.use('/api/tool', ToolRoute);
     app.use('/api/news', NewsRoute);
+    app.use('/api/book', BookRoute);
+    // app.use('/api/like', LikeRoute);
+    // app.use('/api/comment', CommentRoute);
+    // app.use('/api/about', AboutRoute);
 }
 
 module.exports = route;

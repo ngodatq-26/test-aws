@@ -17,8 +17,15 @@ const arrayValidate = [
     body('listdinner.*.name', 'The name is not empty').not().notEmpty(),
     body('listdinner.*.name', 'The name must be string').isString().isLength({ min: 5 }).withMessage('must be at least 5 chars long'),
     body('listdinner.*.description', 'The name is not empty').not().notEmpty(),
-    body('listdinner.*.description', 'The name must be string').isString().isLength({ min: 5 }).withMessage('must be at least 5 chars long'),
+    body('listdinner.*.description', 'The name must be string').isString().isLength({ min: 5 }).withMessage('must be at least 5 chars long')
+     
 ];
+
+const arrayValidateGet = [
+    body('offset').isNumeric().withMessage('Offset must be numeric'),
+    body('limit').isNumeric().withMessage('Limit must be numeric'),
+    body('author').isString().withMessage('Author must be string'),
+]
 
 const arrayValidateParam = [
     param('id').custom(id => {
@@ -42,6 +49,9 @@ const arrayValidateDelete = [
         })
     })
 ];
+const validateGetDinner = () => {
+    return arrayValidateGet;
+}
 
 const validateCreateDinner = () => {
     return arrayValidate;
@@ -59,5 +69,6 @@ const validateDeleteDinner = () => {
 module.exports = {
     validateCreateDinner : validateCreateDinner,
     validateUpdateDinner : validateUpdateDinner,
-    validateDeleteDinner : validateDeleteDinner
+    validateDeleteDinner : validateDeleteDinner,
+    validateGetDinner : validateGetDinner
 }

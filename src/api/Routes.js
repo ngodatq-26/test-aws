@@ -33,6 +33,41 @@ module.exports = (function() {
             updateOne: '/:id',
             deleteOne: '/:id',
             createOne: '',
+        },
+        news: {
+            getAll: '',
+            getOne: '/:id',
+            updateOne: '/:id',
+            deleteOne: '/:id',
+            createOne: '',
+        },
+        book: {
+            getAll: '',
+            getOne: '/:id',
+            updateOne: '/:id',
+            deleteOne: '/:id',
+            createOne: '',
+        },
+        like: {
+            getAll: '',
+            getOne: '/:id',
+            updateOne: '/:id',
+            deleteOne: '/:id',
+            createOne: '',
+        },
+        comment: {
+            getAll: '',
+            getOne: '/:id',
+            updateOne: '/:id',
+            deleteOne: '/:id',
+            createOne: '',
+        },
+        about: {
+            getAll: '',
+            getOne: '/:id',
+            updateOne: '/:id',
+            deleteOne: '/:id',
+            createOne: '',
         }
     }
 })()

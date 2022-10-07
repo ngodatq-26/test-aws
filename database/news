@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "6334a2ef8f3a1b079d6e624c"
+  },
+  "title": "first news monday",
+  "description": "viết gì đó đi",
+  "picture": [
+    "local/image.png"
+  ],
+  "author": {
+    "$oid": "6334a3388f3a1b079d6e624d"
+  }
+}]

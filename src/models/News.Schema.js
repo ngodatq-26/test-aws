@@ -9,7 +9,7 @@ const newsSchema = new Schema({
 	},
 	content: String,
 	pictures: [ String ],
-	author: {
+	author_id: {
 		type: Schema.Types.ObjectId,
 		// required: true,
 	},

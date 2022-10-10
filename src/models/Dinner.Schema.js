@@ -8,11 +8,11 @@ const dinnerSchema = new Schema({
         required : true,
         default : ""
     },
-    listdinner : {
+    dinner_list : {
         type : Array,
         required : false,
     },
-    author : {
+    author_id : {
         type : Schema.Types.ObjectId,
         required : true,
         ref : utils.models.users
@@ -27,11 +27,11 @@ const dinnerSchema = new Schema({
     },
 });
 
-dinnerSchema.static('getAllDinner', async function(skip, limit, author) {
-    if(!author) {
+dinnerSchema.static('getAllDinner', async function(skip, limit, author_id) {
+    if(!author_id) {
         return await this.find().limit(limit).skip(skip);
     } else return await this.find({
-        author : mongoose.Types.ObjectId(author.trim())
+        author_id : mongoose.Types.ObjectId(author_id.trim())
     }).limit(limit).skip(skip);
 });
 
@@ -39,11 +39,11 @@ dinnerSchema.static('getOneDinner', async function(ObjectId) {
     return this.findById(mongoose.Types.ObjectId(ObjectId.trim()));
 });
 
-dinnerSchema.static('saveNewDinner', async function (title, listdinner, author) {
+dinnerSchema.static('saveNewDinner', async function (title, listdinner, author_id) {
     const Dinner = new this({
         title : title,
         listdinner : listdinner,
-        author : mongoose.Types.ObjectId(author.trim())
+        author_id : mongoose.Types.ObjectId(author_id.trim())
     });
     Dinner.save();
 });

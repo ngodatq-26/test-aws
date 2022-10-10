@@ -1,51 +1,55 @@
-const { Recipe } = require('../models/Recipe.Schema');
-const { validationResult } = require("express-validator");
-// const config = require('../config/Config.Env');
+const { About } = require('../models/About.Schema');
+const { validationResult } = require('express-validator');
 
 module.exports = {
 	getAll: async (req, res, next) => {
 		try {
-			const recipes = await Recipe.getAll();
+			const abouts = await About.getAll();
 			return res.status(200).json({
 				status: 200,
 				message: 'Got all',
-				data: recipes,
-			})
+				data: abouts,
+			});
 		} catch(err) {
-			// console.log(err);
 			return res.status(400).json({
 				status: 400,
 				message: err,
 				data: null,
-			})
+			});
 		}
 	},
 
 	getOne: async (req, res, next) => {
 		try {
-			const recipe = await Recipe.getOne(req.params.id);
-			if (!recipe) {
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
 				return res.status(400).json({
 					status: 400,
-					message: 'Recipe not found',
+					message: errors.array(),
 					data: null,
 				});
 			}
-
+			
+			const id = req.params.id;
+			const about = await About.getOne(id);
+			if (!about) {
+				return res.status(400).json({
+					status: 400,
+					message: 'About not found',
+					data: null,
+				});
+			}
 			return res.status(200).json({
 				status: 200,
-				message: 'Recipe found',
-				data: {
-					recipe: recipe,
-				},
+				message: 'About found',
+				data: about,
 			});
 		} catch(err) {
-			// console.log(err);
 			return res.status(400).json({
 				status: 400,
 				message: err,
 				data: null,
-			})
+			});
 		}
 	},
 
@@ -60,21 +64,18 @@ module.exports = {
 				});
 			}
 
-			const recipe = await Recipe.createOne(req.body);
-
+			const about = await About.createOne(req.body);
 			return res.status(200).json({
 				status: 200,
 				message: 'Created successfully',
-				data: {
-					recipe: recipe,
-				},
+				data: about,
 			});
 		} catch(err) {
 			return res.status(400).json({
-                status: 400,
-                message: err,
-                data: null,
-            });
+				status: 400,
+				message: err,
+				data: null,
+			});
 		}
 	},
 
@@ -90,21 +91,18 @@ module.exports = {
 			}
 
 			const id = req.params.id;
-			const recipe = await Recipe.updateOne(id, req.body);
-
+			const about = await About.updateOne(id, req.body);
 			return res.status(200).json({
 				status: 200,
 				message: 'Updated successfully',
-				data: {
-					recipe: recipe,
-				},
+				data: about,
 			});
 		} catch(err) {
 			return res.status(400).json({
-                status: 400,
-                message: err,
-                data: null,
-            });
+				status: 400,
+				message: err,
+				data: null,
+			});
 		}
 	},
 
@@ -120,22 +118,18 @@ module.exports = {
 			}
 
 			const id = req.params.id;
-
-			const recipe = await Recipe.deleteOne(id);
-
+			const about = await About.deleteOne(id);
 			return res.status(200).json({
 				status: 200,
 				message: 'Deleted successfully',
-				data: {
-					recipe: recipe,
-				},
+				data: about,
 			});
 		} catch(err) {
 			return res.status(400).json({
-                status: 400,
-                message: err,
-                data: null,
-            });
+				status: 400,
+				message: err,
+				data: null,
+			});
 		}
-	}
-}
+	},
+};

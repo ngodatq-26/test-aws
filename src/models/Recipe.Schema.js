@@ -12,10 +12,10 @@ const recipeSchema = new Schema ({
 		type: String,
 		required: true,
 	},
-	country: [String],
-	picture: [String],
+	countries: [String],
+	pictures: [String],
 	video: String,
-	meal: {
+	meals: {
 		type: [{
 			type: String,
 			enum: meals,
@@ -58,7 +58,7 @@ const recipeSchema = new Schema ({
 		amount: Number,
 		unit: String,
 	}],
-	categories: [
+	category_ids: [
 		{
 			type: Schema.Types.ObjectId,
 		}
@@ -70,7 +70,7 @@ const recipeSchema = new Schema ({
 			image: String,
 		}
 	],
-	author: {
+	author_id: {
 		type: Schema.Types.ObjectId,
 		// required: true,
 	},
@@ -97,19 +97,18 @@ recipeSchema.static('getOne', async function(ObjectId) {
     return await this.findById(mongoose.Types.ObjectId(ObjectId));
 });
 
-// recipeSchema.static('createOne', async function(attrs) {
-// 	if (attrs.name) {
-
-// 	}
-// 	return await this.create(attributes);
-// });
-
-recipeSchema.static('updateOne', async function(ObjectId, update) {
-    return await this.findByIdAndUpdate(mongoose.Types.ObjectId(ObjectId), update, { new: true });
+recipeSchema.static('createOne', async function(attrs) {
+	const recipe = new Recipe(attrs);
+	await recipe.save();
+	return recipe;
 });
 
-recipeSchema.static('deleteOne', async function(ObjectId) {
-    return await this.findByIdAndDelete(mongoose.Types.ObjectId(ObjectId));
+recipeSchema.static('updateOne', async function(id, update) {
+    return await this.findByIdAndUpdate(mongoose.Types.ObjectId(id), update, { new: true });
+});
+
+recipeSchema.static('deleteOne', async function(id) {
+    return await this.findByIdAndDelete(mongoose.Types.ObjectId(id));
 });
 
 const Recipe = mongoose.model(utils.models.recipe, recipeSchema);

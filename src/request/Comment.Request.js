@@ -1,6 +1,6 @@
 const { body, param } = require('express-validator');
 const expressValidator = require('express-validator');
-const { Like } = require('../models/Like.Schema');
+const { Comment } = require('../models/Comment.Schema');
 
 const validateAttributes = [
 	body('user_id', 'User ID is empty').not().notEmpty(),
@@ -8,9 +8,9 @@ const validateAttributes = [
 
 const validateId = [
 	param('id').custom(id => {
-		return Like.getOne(id).then(data => {
+		return Comment.getOne(id).then(data => {
 			if (!data) {
-				return Promise.reject('Like does not exist');
+				return Promise.reject('Comment does not exist');
 			}
 		});
 	}),

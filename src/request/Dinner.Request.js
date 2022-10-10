@@ -5,11 +5,11 @@ const { User } = require('../models/User.Schema');
 
 const arrayValidate = [
     body('title', 'The title is not Empty').not().notEmpty(),
-    body('author', 'The author is not Empty').not().notEmpty(),
-    body('author').custom(author => {
-        return User.findUserByObjectId(author).then(data => {
+    body('author_id', 'The author is not Empty').not().notEmpty(),
+    body('author_id').custom(author_id => {
+        return User.findUserByObjectId(author_id).then(data => {
             if (!data) {
-                return Promise.reject('Author is not exist');
+                return Promise.reject('Author does not exist');
             }
         })
     }),
@@ -24,7 +24,7 @@ const arrayValidate = [
 const arrayValidateGet = [
     body('offset').isNumeric().withMessage('Offset must be numeric'),
     body('limit').isNumeric().withMessage('Limit must be numeric'),
-    body('author').isString().withMessage('Author must be string'),
+    body('author_id').isString().withMessage('Author ID must be string'),
 ]
 
 const arrayValidateParam = [

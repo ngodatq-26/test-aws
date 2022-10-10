@@ -2,11 +2,10 @@
   "_id": {
     "$oid": "6334ac9a82cf01a4a434af2e"
   },
-  "count": 0,
-  "author": {
+  "user_id": {
     "$oid": "6334acbf82cf01a4a434af2f"
   },
-  "linkto": {
+  "object_id": {
     "$oid": "6334acf082cf01a4a434af30"
   }
 }]

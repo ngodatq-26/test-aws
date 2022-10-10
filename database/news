@@ -7,7 +7,5 @@
   "picture": [
     "local/image.png"
   ],
-  "author": {
-    "$oid": "6334a3388f3a1b079d6e624d"
-  }
+  "author_id": "6334a3388f3a1b079d6e624d"
 }]

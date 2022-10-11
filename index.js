@@ -8,9 +8,10 @@ const port = config.APP_PORT;
 const path = require('path');
 const passportGoogle = require('./src/services/passport/Google.Passport');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended : true}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true}));
 app.use(express.static(`${__dirname}/src/resources/public`));
 
 app.set('views', `${__dirname}/src/resources/views`);

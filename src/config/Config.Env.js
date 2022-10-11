@@ -40,4 +40,10 @@ module.exports = {
     //google
     GOOGLE_CLIENT_ID : process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET : process.env.GOOGLE_CLIENT_SECRET,
+
+    //AWS S3
+    AWS_BUCKET : process.env.AWS_BUCKET,
+    AWS_REGION : process.env.AWS_REGION,
+    AWS_ACCESS_KEY : process.env.AWS_ACCESS_KEY,
+    AWS_SECRET_KEY : process.env.AWS_SECRET_KEY,
 }

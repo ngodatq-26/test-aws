@@ -7,7 +7,10 @@ module.exports = (function() {
             refreshToken : '/refresh-token'
         },
         user : {
-            all : '/all',
+            getAll : '/all',
+            getOne : '/:id',
+            updateOne : '/:id',
+            deleteOne : '/:id'
         },
         oauth : {
             loginGoole : '/google',

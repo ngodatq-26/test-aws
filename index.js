@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true}));
 app.use(express.static(`${__dirname}/src/resources/public`));
+app.use(express.static(`${__dirname}/src/storage`))
 
 app.set('views', `${__dirname}/src/resources/views`);
 app.set('view engine', 'ejs');

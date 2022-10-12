@@ -13,6 +13,7 @@ const BookRoute = require('./Book.Router');
 const LikeRoute = require('./Like.Router');
 const CommentRoute = require('./Comment.Router');
 const AboutRoute = require('./About.Router');
+const UploadRoute = require('../routes/Upload.Router');
 
 function route(app) {
     app.use('/api/auth', AuthRoute);
@@ -26,6 +27,7 @@ function route(app) {
     app.use('/api/like', LikeRoute);
     app.use('/api/comment', CommentRoute);
     app.use('/api/about', AboutRoute);
+    app.use('/api/upload', UploadRoute);
 }
 
 module.exports = route;

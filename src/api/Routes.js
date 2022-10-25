@@ -4,7 +4,8 @@ module.exports = (function() {
             login: '/login',
             register: '/register',
             logout: '/logout',
-            refreshToken : '/refresh-token'
+            refreshToken : '/refresh-token',
+            confirmEmail : '/confirm-email'
         },
         user : {
             getAll : '/all',

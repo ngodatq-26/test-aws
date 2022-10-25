@@ -5,11 +5,15 @@ const db = require('../config/Connect.Mongo');
 const config = require('../config/Config.Env');
 const jwtHelper = require('../middlewares/jwt/Jwt');
 const { sendMail } = require('../services/email/SendMailV2.Services');
-
+const SendMailV2Services = require("../services/email/SendMailV2.Services");
+const {HandleResponse} = require("../utils/HandleResponse");
+const otpGenerator = require('otp-generator');
+const { Confirm } = require("../models/Confirm.Schema");
 const refreshSecretKey = config.REFRESH_SECRET_JWT_KEY;
 const secretKey = config.SECRET_JWT_KEY;
 const accessTokenLife = config.JWT_TIME_LIFE;
 const refeshTokenLife = config.REFRESH_TIME_LIFE;
+
 
 module.exports = {
     //controller login
@@ -26,6 +30,8 @@ module.exports = {
             }
         
             //kiểm tra email có tồn tại hay không
+            var otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+
             const account = await User.findByEmail(req.body.email);
             if(!account) {
                 return res.status(200).json({
@@ -87,43 +93,32 @@ module.exports = {
             const email = req.body.email;
             
             const account = await User.findByEmail(req.body.email);
-            
-            if(account) {
-                return res.status(400).json({
-                    status : 400,
-                    message : 'email đã tồn tại, vui lòng đăng ký bằng email khác!',
-                    data : null
-                })
-            }
 
-            
-
-            //mã hóa mật khẩu
-            hashPassword(req.body.password).then(async (password) => {
-
-                const user = new User({
-                    email: email,
-                    password: password
-                })
-                await user.save();
-
-                return res.status(200).json({
-                    status: 200,
-                    message: 'register successfully!!!',
-                    data: {
-                        email: email,
-                        password: password
-                    }
-                });
-                
-            }).catch(function(err) {
+            if (account) {
                 return res.status(400).json({
                     status: 400,
-                    message: err,
+                    message: 'email đã tồn tại, vui lòng đăng ký bằng email khác!',
                     data: null
                 })
+            }
+            
+            const otp = otpGenerator.generate(7, { upperCaseAlphabets: false, specialChars: false });
+
+            const confirm = new Confirm({
+                email : req.body.email,
+                password : req.body.password,
+                otp : otp
             });
- 
+            confirm.save();
+
+            const data = await SendMailV2Services.sendMail(req.body.email, otp);
+
+            return res.status(200).json({
+                status: 200,
+                message: 'Vui lòng chờ xác thực email',
+                data: null
+            })
+            
         } catch (err) {
             console.log(err)
             return res.status(400).json({
@@ -168,5 +163,44 @@ module.exports = {
     //controller logout
     logout: async (req, res, next) => {
 
-    }
+    },
+
+    confirmEmail : async (req, res, next) => {
+        try{
+            const otpCofirm  = req.body.otp;
+            const checkUser = await Confirm.getOtp(req.body.email, req.body.password);
+
+            if (otpCofirm == checkUser[0].otp) {
+                hashPassword(req.body.password).then(async (password) => {
+
+                    const user = new User({
+                        email: req.body.email,
+                        password: password
+                    })
+                    await user.save();
+
+                    return res.status(200).json({
+                        status: 200,
+                        message: 'register successfully!!!',
+                        data: {
+                            email: req.body.email,
+                            password: req.body.password
+                        }
+                    });
+
+                }).catch(function (err) {
+                    return res.status(400).json({
+                        status: 400,
+                        message: err,
+                        data: null
+                    })
+                });
+
+            } else {
+                return res.status(401).json(HandleResponse(401, 'Lỗi xác thực otp', null));
+            }
+        } catch (err) {
+            return res.status(400).json(HandleResponse(400, 'Lỗi error', null));
+        }
+    },
 }

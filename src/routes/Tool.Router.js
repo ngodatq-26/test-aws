@@ -5,7 +5,7 @@ const api = require('../api/Routes');
 const authMiddleware = require('../middlewares/Auth.Middleware');
 const toolRequest = require('../request/Tool.Request');
 
-// router.use(authMiddleware.checkJwtMiddleware);
+router.use(authMiddleware.checkJwtMiddleware);
 router.get(api.tool.getAll, ToolController.getAll);
 router.get(api.tool.getOne, ToolController.getOne);
 router.post(api.tool.createOne, toolRequest.validateCreate(), ToolController.createOne);

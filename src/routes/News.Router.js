@@ -5,7 +5,7 @@ const NewsController = require('../controllers/News.Controller');
 const NewsRequest = require('../request/News.Request');
 const authMiddleware = require('../middlewares/Auth.Middleware');
 
-// router.use(authMiddleware.checkJwtMiddleware);
+router.use(authMiddleware.checkJwtMiddleware);
 router.get(api.news.getAll, NewsController.getAll);
 router.get(api.news.getOne, NewsController.getOne);
 router.post(api.news.createOne, NewsRequest.validateCreate(), NewsController.createOne);

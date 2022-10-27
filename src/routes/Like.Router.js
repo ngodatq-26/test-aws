@@ -5,7 +5,7 @@ const api = require('../api/Routes');
 const authMiddleware = require('../middlewares/Auth.Middleware');
 const likeRequest = require('../request/Like.Request');
 
-// router.use(authMiddleware.checkJwtMiddleware);
+router.use(authMiddleware.checkJwtMiddleware);
 router.get(api.like.getAll, LikeController.getAll);
 router.get(api.like.getOne, LikeController.getOne);
 router.post(api.like.createOne, likeRequest.validateCreate(), LikeController.createOne);

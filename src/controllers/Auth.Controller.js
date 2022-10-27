@@ -175,7 +175,8 @@ module.exports = {
 
                     const user = new User({
                         email: req.body.email,
-                        password: password
+                        password: password,
+                        name : req.body.name
                     })
                     await user.save();
 
@@ -184,7 +185,8 @@ module.exports = {
                         message: 'register successfully!!!',
                         data: {
                             email: req.body.email,
-                            password: req.body.password
+                            password: req.body.password,
+                            name : req.body.name
                         }
                     });
 

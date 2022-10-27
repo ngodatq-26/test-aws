@@ -5,7 +5,7 @@ const api = require('../api/Routes');
 const authMiddleware = require('../middlewares/Auth.Middleware');
 const aboutRequest = require('../request/About.Request');
 
-// router.use(authMiddleware.checkJwtMiddleware);
+router.use(authMiddleware.checkJwtMiddleware);
 router.get(api.about.getAll, AboutController.getAll);
 router.get(api.about.getOne, AboutController.getOne);
 router.post(api.about.createOne, aboutRequest.validateCreate(), AboutController.createOne);

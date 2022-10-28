@@ -22,7 +22,7 @@ module.exports = {
             //validate dữ liệu trước khi xử lý 
             const errors = validationResult(req);
             if(!errors.isEmpty()) {
-                return res.status(200).json({ 
+                return res.status(400).json({ 
                     status : 400,
                     message : errors.array(),
                     data : null,
@@ -34,7 +34,7 @@ module.exports = {
 
             const account = await User.findByEmail(req.body.email);
             if(!account) {
-                return res.status(200).json({
+                return res.status(400).json({
                     status : 400,
                     message : "tài khoản này không tồn tại !",
                 })
@@ -42,7 +42,7 @@ module.exports = {
 
             //nếu email tồn tại, kiểm tra password có đúng hay không
             if(!comparePassword(req.body.password, account.password)) {
-                return res.status(200).json({
+                return res.status(400).json({
                     status: 400,
                     message: "Sai mật khẩu!",
                 })

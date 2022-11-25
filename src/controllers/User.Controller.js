@@ -2,7 +2,10 @@ const db = require("../config/Connect.Mongo");
 const { User } = require("../models/User.Schema");
 const { HandleResponse } = require("../utils/HandleResponse");
 const { validationResult } = require("express-validator");
+const jwtHelper = require('../middlewares/jwt/Jwt');
+const config = require('../config/Config.Env');
 
+const secretKey = config.SECRET_JWT_KEY;
 module.exports = {
   allUsers: async (req, res, next) => {
     try {
@@ -80,4 +83,16 @@ module.exports = {
       return res.status(400).json(HandleResponse(400, error, null));
     }
   },
+
+  getUser : async (req, res, next) => {
+    try {
+      var token = req.body.token || req.query.token || req.headers.authorization;
+      token = token.replace("Bearer ", "");
+      const decoded = await jwtHelper.verifyToken(token, secretKey);
+      return res.status(200).json(HandleResponse(200,'successfully', decoded));
+    } catch (err) {
+      console.log(err)
+      return res.status(400).json(HandleResponse(400, err, null));
+    }
+  }
 };

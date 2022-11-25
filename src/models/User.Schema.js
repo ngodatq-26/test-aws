@@ -87,6 +87,13 @@ userSchema.static("deleteOneUser", async function (ObjectId) {
   return await this.findByIdAndRemove(mongoose.Types.ObjectId(ObjectId));
 });
 
+userSchema.static("updatePassword", async function (ObjectId, password) {
+  return await this.findByIdAndUpdate(
+    mongoose.Types.ObjectId(ObjectId),
+    password
+  );
+});
+
 const User = mongoose.model(utils.models.users, userSchema);
 
 module.exports = {

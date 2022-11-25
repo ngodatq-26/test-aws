@@ -48,13 +48,8 @@ module.exports = {
                 })
             }
 
-            const userData = {
-                email : req.body.email,
-                password : req.body.password
-            }
-
-            const accessToken = await jwtHelper.generateToken(userData, secretKey, accessTokenLife);
-            const refreshToken = await jwtHelper.generateToken(userData, refreshSecretKey, refeshTokenLife);
+            const accessToken = await jwtHelper.generateToken(account, secretKey, accessTokenLife);
+            const refreshToken = await jwtHelper.generateToken(account, refreshSecretKey, refeshTokenLife);
 
             return res.status(200).json({
                 status : 200,
@@ -205,4 +200,42 @@ module.exports = {
             return res.status(400).json(HandleResponse(400, 'Lỗi error', null));
         }
     },
+
+    forgetPassword : async (req, res, next) => {
+        try {
+
+        } catch (err) {
+            return res.status(400).json(HandleResponse(400, 'Lỗi error', null));
+        }
+    },
+
+    newPassword : async (req, res, next) => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({
+                    status: 400,
+                    message: errors.array(),
+                    data: null,
+                });
+            }
+
+            if(req.body.password !== req.body.newPassword) {
+                return res.status(400).json(HandleResponse(400, 'password và password mới phải giống nhau', null));
+            }
+
+            hashPassword(req.body.password).then(async (password) => {
+                const update = {
+                    password : password
+                };
+                console.log(update)
+                const newUser = User.updateOneUser(req.body.user_id, update);
+                return res.status(400).json(HandleResponse(200, 'Update mật khẩu mới thành công', newUser));
+            });
+
+           
+        } catch (err) {
+            return res.status(400).json(HandleResponse(400, 'Lỗi error', null));
+        }
+    }
 }

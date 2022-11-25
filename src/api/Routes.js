@@ -5,7 +5,8 @@ module.exports = (function() {
             register: '/register',
             logout: '/logout',
             refreshToken : '/refresh-token',
-            confirmEmail : '/confirm-email'
+            confirmEmail : '/confirm-email',
+            updatePassword : '/update-password'
         },
         user : {
             getAll : '/all',

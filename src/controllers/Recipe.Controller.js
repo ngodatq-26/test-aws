@@ -21,9 +21,9 @@ module.exports = {
 		}
 	},
 
-	getOne: async (req, res, next) => {
+	getOne : async (req, res, next) => {
 		try {
-			const recipe = await Recipe.getOne(req.params.id);
+			const recipe = await Recipe.getOneRecipe(req.params.id);
 			if (!recipe) {
 				return res.status(400).json({
 					status: 400,
@@ -60,7 +60,7 @@ module.exports = {
 				});
 			}
 
-			const recipe = await Recipe.createOne(req.body);
+			const recipe = await Recipe.createOneRecipe(req.body);
 
 			return res.status(200).json({
 				status: 200,
@@ -90,7 +90,7 @@ module.exports = {
 			}
 
 			const id = req.params.id;
-			const recipe = await Recipe.updateOne(id, req.body);
+			const recipe = await Recipe.updateOneRecipe(id, req.body);
 
 			return res.status(200).json({
 				status: 200,
@@ -121,7 +121,7 @@ module.exports = {
 
 			const id = req.params.id;
 
-			const recipe = await Recipe.deleteOne(id);
+			const recipe = await Recipe.deleteOneRecipe(id);
 
 			return res.status(200).json({
 				status: 200,
@@ -137,5 +137,5 @@ module.exports = {
                 data: null,
             });
 		}
-	}
+	},
 }

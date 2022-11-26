@@ -20,7 +20,7 @@ const validateAttributes = [
 
 const arrayValidateParam = [
     param('id').custom(id => {
-        return Recipe.getOne(id).then(data => {
+        return Recipe.getOneRecipe(id).then(data => {
             if (!data) {
                 return Promise.reject('Recipe does not exist');
             }

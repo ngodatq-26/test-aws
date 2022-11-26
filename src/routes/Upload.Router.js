@@ -18,6 +18,6 @@ const upload = multer({ storage : storage });
 const UploadController = require('../controllers/Upload.Controller');
 
 router.use(authMiddleware.checkJwtMiddleware);
-router.post('/image', upload.single('image'), UploadController.uploadStorage);
+router.post('/image', upload.single('file'), UploadController.uploadStorage);
 
 module.exports = router;

@@ -1,8 +1,13 @@
-# syntax=docker/dockerfile:1
-FROM node:12-alpine
-RUN apk add --no-cache python2 g++ make
+FROM node:16-alpine
+
+RUN mkdir /app
 WORKDIR /app
+
+COPY package.json .
+COPY package-lock.json .
+
+RUN npm i -g pm2 && npm install
+
 COPY . .
-RUN yarn install --production
-CMD ["node", "index.js"]
-EXPOSE 3000
+CMD ["sh", "-c", "npm run production"]
+EXPOSE 5500

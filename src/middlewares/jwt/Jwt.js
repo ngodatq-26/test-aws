@@ -2,14 +2,8 @@ const jwt = require('jsonwebtoken');
 
 const generateToken = (user, secretKey, accessTokenLife) => {
     return new Promise((resolve, reject) => {
-
-        const userData = {
-            email : user.email,
-            password : user.password
-        }
-
         const payload = {
-            data : userData,
+            data : user,
         };
         const options = {
             algorithm : "HS256",

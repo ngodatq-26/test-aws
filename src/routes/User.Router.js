@@ -10,5 +10,5 @@ router.use(authMiddleware.checkJwtMiddleware);
 router.get(api.user.getAll, UserController.allUsers);
 router.put(api.user.updateOne, validateUpdateUser(), UserController.updateOne);
 router.delete(api.user.deleteOne, validateDeleteUser(), UserController.deleteOne);
-
+router.get('/token', UserController.getUser)
 module.exports = router;

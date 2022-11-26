@@ -18,6 +18,21 @@ const validateRegister = () => {
   ];
 };
 
+const validateUpdatePassword = () => {
+  return [
+    body('user_id', 'The user_id is not Empty').not().notEmpty(),
+    body('user_id').custom(user_id => {
+      return User.findUserByObjectId(user_id).then(data => {
+        if (!data) {
+          return Promise.reject('User does not exist');
+        }
+      })
+    }),
+    body("password", "Password more than 6 degits").isLength({ min: 6 }),
+    body("newPassword", "Update Password more than 6 degits").isLength({ min: 6 })
+  ];
+}
+
 const arrayValidate = [
     body('email', 'Email is not Empty').not().notEmpty(),
     body("email", "Invalid Email!").isEmail(),
@@ -36,6 +51,7 @@ const arrayValidateParam = [
     })
 ];
 
+
 const validateEmail = [body("email", "Invalid Email!").isEmail()];
 
 const validateUpdateUser = () => {
@@ -51,5 +67,6 @@ module.exports = {
   validateRegister: validateRegister,
   validateEmail: validateEmail,
   validateUpdateUser : validateUpdateUser,
-  validateDeleteUser : validateDeleteUser
+  validateDeleteUser : validateDeleteUser,
+  validateUpdatePassword : validateUpdatePassword,
 };

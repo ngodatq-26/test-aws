@@ -11,6 +11,6 @@ router.use('', authMiddleware.checkJwtMiddleware, (router) => {
     router.post(api.about.createOne, aboutRequest.validateCreate(), AboutController.createOne);
     router.put(api.about.updateOne, aboutRequest.validateUpdate(), AboutController.updateOne);
     router.delete(api.about.deleteOne, aboutRequest.validataDelete(), AboutController.deleteOne);
-})
+});
 
 module.exports = router;

@@ -8,10 +8,8 @@ const toolRequest = require('../request/Tool.Request');
 
 router.get(api.tool.getAll, ToolController.getAll);
 router.get(api.tool.getOne, ToolController.getOne);
-router.use('', authMiddleware.checkJwtMiddleware, (router) => {
-    router.post(api.tool.createOne, toolRequest.validateCreate(), ToolController.createOne);
-    router.put(api.tool.updateOne, toolRequest.validateUpdate(), ToolController.updateOne);
-    router.delete(api.tool.deleteOne, toolRequest.validataDelete(), ToolController.deleteOne);
-})
+router.post(api.tool.createOne, authMiddleware.checkJwtMiddleware, toolRequest.validateCreate(), ToolController.createOne);
+router.put(api.tool.updateOne, authMiddleware.checkJwtMiddleware, toolRequest.validateUpdate(), ToolController.updateOne);
+router.delete(api.tool.deleteOne, authMiddleware.checkJwtMiddleware, toolRequest.validataDelete(), ToolController.deleteOne);
 
 module.exports = router;

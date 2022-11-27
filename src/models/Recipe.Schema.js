@@ -12,6 +12,7 @@ const recipeSchema = new Schema ({
 		type: String,
 		required: true,
 	},
+	description : String,
 	countries: [String],
 	pictures: [String],
 	video: String,

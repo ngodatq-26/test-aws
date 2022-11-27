@@ -7,10 +7,8 @@ const bookRequest = require('../request/Book.Request');
 
 router.get(api.book.getAll, BookController.getAll);
 router.get(api.book.getOne, BookController.getOne);
-router.use('', authMiddleware.checkJwtMiddleware, (router) => {
-    router.post(api.book.createOne, bookRequest.validateCreate(), BookController.createOne);
-    router.put(api.book.updateOne, bookRequest.validateUpdate(), BookController.updateOne);
-    router.delete(api.book.deleteOne, bookRequest.validataDelete(), BookController.deleteOne);
-})
+router.post(api.book.createOne, authMiddleware.checkJwtMiddleware, bookRequest.validateCreate(), BookController.createOne);
+router.put(api.book.updateOne, authMiddleware.checkJwtMiddleware, bookRequest.validateUpdate(), BookController.updateOne);
+router.delete(api.book.deleteOne, authMiddleware.checkJwtMiddleware, bookRequest.validataDelete(), BookController.deleteOne);
 
 module.exports = router;

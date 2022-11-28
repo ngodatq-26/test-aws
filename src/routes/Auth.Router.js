@@ -9,5 +9,7 @@ router.post(api.auth.login, AuthRequest.validateLogin(), AuthController.login);
 router.post(api.auth.register, AuthRequest.validateRegister(),  AuthController.register);
 router.post(api.auth.logout, AuthController.logout);
 router.post(api.auth.refreshToken, AuthController.refreshTokenController);
+router.post(api.auth.confirmEmail, AuthController.confirmEmail);
+router.post(api.auth.updatePassword, AuthRequest.validateUpdatePassword(), AuthController.newPassword);
 
 module.exports = router;

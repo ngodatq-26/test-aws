@@ -4,10 +4,15 @@ module.exports = (function() {
             login: '/login',
             register: '/register',
             logout: '/logout',
-            refreshToken : '/refresh-token'
+            refreshToken : '/refresh-token',
+            confirmEmail : '/confirm-email',
+            updatePassword : '/update-password'
         },
         user : {
-            all : '/all',
+            getAll : '/all',
+            getOne : '/:id',
+            updateOne : '/:id',
+            deleteOne : '/:id'
         },
         oauth : {
             loginGoole : '/google',

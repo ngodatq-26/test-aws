@@ -1,0 +1,42 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@1.4.0
+
+jobs:
+  job_build:
+    working_directory: ~/test-aws
+    environment:
+      DOCKER_IMAGE: mailnophone03/food-recipe-backend
+      DOCKER_TAG: latest
+    machine:
+      image: ubuntu-2204:2022.04.2
+    steps:
+      - checkout
+      - run:
+          name: Build docker image
+          command: cd ~/test-aws && docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
+      - run:
+          name: Push image to docker hub
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker push $DOCKER_IMAGE:$DOCKER_TAG
+  job_deploy:
+    executor: docker/docker
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - $SSH_KEY_FINGERPRINT
+      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER 'cd ~/test-aws && sh ./deploy.sh'
+
+workflows:
+  my-pipeline:
+    jobs:
+      - job_build
+      - job_deploy:
+          filters:
+            branches:
+              only:
+                - main
+                - develop
+          requires:
+            - job_build

@@ -12,6 +12,7 @@ const recipeSchema = new Schema ({
 		type: String,
 		required: true,
 	},
+	description : String,
 	countries: [String],
 	pictures: [String],
 	video: String,
@@ -93,21 +94,21 @@ recipeSchema.static('getAll', async function() {
 	return await this.find();
 });
 
-recipeSchema.static('getOne', async function(ObjectId) {
+recipeSchema.static('getOneRecipe', async function(ObjectId) {
     return await this.findById(mongoose.Types.ObjectId(ObjectId));
 });
 
-recipeSchema.static('createOne', async function(attrs) {
+recipeSchema.static('createOneRecipe', async function(attrs) {
 	const recipe = new Recipe(attrs);
 	await recipe.save();
 	return recipe;
 });
 
-recipeSchema.static('updateOne', async function(id, update) {
+recipeSchema.static('updateOneRecipe', async function(id, update) {
     return await this.findByIdAndUpdate(mongoose.Types.ObjectId(id), update, { new: true });
 });
 
-recipeSchema.static('deleteOne', async function(id) {
+recipeSchema.static('deleteOneRecipe', async function(id) {
     return await this.findByIdAndDelete(mongoose.Types.ObjectId(id));
 });
 

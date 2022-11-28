@@ -23,6 +23,10 @@ app.use(cors());
 route(app);
 
 
+app.get('/api/healthz', (req, res) => {
+    return res.json({ status: 'ok' })
+})
+
 //404 handler and pass to error handler
 app.use((req, res, next) => {
     res.status(404).render('404');

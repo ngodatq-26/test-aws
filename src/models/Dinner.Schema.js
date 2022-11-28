@@ -56,6 +56,10 @@ dinnerSchema.static('deleteOneDinner', async function(ObjectId) {
     return await this.findByIdAndRemove(mongoose.Types.ObjectId(ObjectId));
 });
 
+dinnerSchema.static('deleteDinnerByAuthorId', async function(authorId) {
+    return await this.findByIdAndRemove(mongoose.Types.ObjectId(authorId));
+});
+
 const Dinner = mongoose.model(utils.models.dinner, dinnerSchema);
 
 module.exports = {

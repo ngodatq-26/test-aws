@@ -5,7 +5,7 @@ const api = require('../api/Routes');
 const authMiddleware = require('../middlewares/Auth.Middleware');
 const commentRequest = require('../request/Comment.Request');
 
-// router.use(authMiddleware.checkJwtMiddleware);
+router.use(authMiddleware.checkJwtMiddleware);
 router.get(api.comment.getAll, CommentController.getAll);
 router.get(api.comment.getOne, CommentController.getOne);
 router.post(api.comment.createOne, commentRequest.validateCreate(), CommentController.createOne);

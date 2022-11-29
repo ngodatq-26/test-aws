@@ -1,3 +1,4 @@
+const { query } = require('express');
 const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
 const { recipe } = require('../api/Routes');
@@ -90,8 +91,15 @@ recipeSchema.method = {
 };
 
 // STATIC
-recipeSchema.static('getAll', async function() {
-	return await this.find();
+recipeSchema.static('getAll', async function(attrs) {
+	var { name, author_id, category_id } = attrs;
+	var query = {
+		...(name && {name: { $regex: new RegExp(name, "i") }}),
+		...(author_id && {author_id: author_id}),
+		...(category_id && {category_ids: category_id})
+	};
+	
+	return await this.find(query);
 });
 
 recipeSchema.static('getOneRecipe', async function(ObjectId) {

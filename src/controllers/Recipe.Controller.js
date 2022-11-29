@@ -5,11 +5,14 @@ const { validationResult } = require("express-validator");
 module.exports = {
 	getAll: async (req, res, next) => {
 		try {
-			const recipes = await Recipe.getAll();
+			const recipes = await Recipe.getAll(req.body);
 			return res.status(200).json({
 				status: 200,
 				message: 'Got all',
-				data: recipes,
+				data: {
+					attrs: req.body,
+					recipes,
+				},
 			})
 		} catch(err) {
 			// console.log(err);

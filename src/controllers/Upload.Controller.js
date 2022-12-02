@@ -14,7 +14,7 @@ module.exports = {
                 status : "200",
                 message : "upload image successfully",
                 data : {
-                    file_path : `/${req.file.filename}`, 
+                    file_path : config.DOMAIN_APP + `/${req.file.filename}`       
                 }
             })
         } catch (err) {

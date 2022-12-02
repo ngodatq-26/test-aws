@@ -1,5 +1,6 @@
 const { Book } = require('../models/Book.Schema');
 const { validationResult } = require('express-validator');
+const RequestUser = require('../utils/RequestUser');
 
 module.exports = {
 	getAll: async (req, res, next) => {
@@ -64,7 +65,8 @@ module.exports = {
 				});
 			}
 
-			const book = await Book.createOne(req.body);
+			const user = RequestUser(req);
+			const book = await Book.createOne(req.body, user);
 			return res.status(200).json({
 				status: 200,
 				message: 'Created successfully',
@@ -91,11 +93,22 @@ module.exports = {
 			}
 
 			const id = req.params.id;
-			const book = await Book.updateOne(id, req.body);
+			const user = RequestUser(req);
+			const book = await Book.getOne(id);
+			if (user.role !== 1 && user._id != book.author_id) {
+				return res.status(401).json({
+					status: 401,
+					message: 'You are not authorized',
+					data: {
+					},
+				})
+			}
+
+			const new_book = await Book.updateOne(id, req.body, user);
 			return res.status(200).json({
 				status: 200,
 				message: 'Updated successfully',
-				data: book,
+				data: new_book,
 			});
 		} catch(err) {
 			return res.status(400).json({
@@ -117,12 +130,22 @@ module.exports = {
 				});
 			}
 
+			const user = RequestUser(req);
 			const id = req.params.id;
-			const book = await Book.deleteOne(id);
+			const book = await Book.getOne(id);
+			if (user.role !== 1 && user._id != book.author_id) {
+				return res.status(401).json({
+					status: 401,
+					message: 'You are not authorized',
+					data: {
+					},
+				})
+			}
+			const deleted_book = await Book.deleteOne(id, user);
 			return res.status(200).json({
 				status: 200,
 				message: 'Deleted successfully',
-				data: book,
+				data: deleted_book,
 			});
 		} catch(err) {
 			return res.status(400).json({

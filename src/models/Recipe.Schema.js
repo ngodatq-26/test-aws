@@ -74,7 +74,7 @@ const recipeSchema = new Schema ({
 	],
 	author_id: {
 		type: Schema.Types.ObjectId,
-		// required: true,
+		required: true,
 	},
     since : {
         type : Date,
@@ -106,8 +106,12 @@ recipeSchema.static('getOneRecipe', async function(ObjectId) {
     return await this.findById(mongoose.Types.ObjectId(ObjectId));
 });
 
-recipeSchema.static('createOneRecipe', async function(attrs) {
-	const recipe = new Recipe(attrs);
+recipeSchema.static('createOneRecipe', async function(attrs, user) {
+	const attributes = {
+		...attrs,
+		author_id: user._id
+	}
+	const recipe = new Recipe(attributes);
 	await recipe.save();
 	return recipe;
 });

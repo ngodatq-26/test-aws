@@ -2,18 +2,28 @@ const db = require("../config/Connect.Mongo");
 const { User } = require("../models/User.Schema");
 const { HandleResponse } = require("../utils/HandleResponse");
 const { validationResult } = require("express-validator");
-const jwtHelper = require('../middlewares/jwt/Jwt');
 const config = require('../config/Config.Env');
+const { RequestUser } = require('../utils/RequestUser');
 
-const secretKey = config.SECRET_JWT_KEY;
 module.exports = {
   allUsers: async (req, res, next) => {
+    const { role } = await RequestUser(req);
+    if (role !== 1) {
+			return res.status(401).json({
+				status: 401,
+				message: 'You are unauthorized',
+				data: {
+				},
+			})
+		}
     try {
       const account = await User.findByEmail(req.body.email);
       return res.status(200).json({
         status: 200,
         message: "find successfully",
-        data: account,
+        data: { 
+          account,
+        }
       });
     } catch (err) {
       console.log(err);
@@ -49,13 +59,22 @@ module.exports = {
   },
 
   //sửa,cập nhật 1 user
-  updateOne: (req, res, next) => {
+  updateOne: async (req, res, next) => {
+    const user = await RequestUser(req);
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json(HandleResponse(400, errors.array(), null));
       }
 
+      if (user.role !== 1 && user._id != res.params.id) {
+        return res.status(401).json({
+          status: 401,
+          message: 'You are not authorized',
+          data: {
+          },
+        })
+      }
       const update = User.updateOneUser(req.params.id, req.body);
       return res
         .status(200)
@@ -67,6 +86,15 @@ module.exports = {
 
   //Xóa user cần xóa
   deleteOne: async (req, res, next) => {
+    const { role } = await RequestUser(req);
+    if (role !== 1) {
+			return res.status(401).json({
+				status: 401,
+				message: 'You are unauthorized',
+				data: {
+				},
+			})
+		}
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -86,10 +114,8 @@ module.exports = {
 
   getUser : async (req, res, next) => {
     try {
-      var token = req.body.token || req.query.token || req.headers.authorization;
-      token = token.replace("Bearer ", "");
-      const decoded = await jwtHelper.verifyToken(token, secretKey);
-      return res.status(200).json(HandleResponse(200,'successfully', decoded));
+      var user = await RequestUser(req);
+      return res.status(200).json(HandleResponse(200,'successfully', {data: user}));
     } catch (err) {
       console.log(err)
       return res.status(400).json(HandleResponse(400, err, null));

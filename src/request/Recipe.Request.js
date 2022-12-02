@@ -12,13 +12,6 @@ const validateRecipe = function() {
 
 const validateAttributes = [
     body('name', 'Name is empty').not().notEmpty(),
-    body('author_id').custom(author_id => {
-        return User.findUserByObjectId(author_id).then(data => {
-            if (!data) {
-                return Promise.reject('Author does not exist');
-            }
-        })
-    }),
 ];
 
 const arrayValidateParam = [

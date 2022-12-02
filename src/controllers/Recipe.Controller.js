@@ -10,10 +10,7 @@ module.exports = {
 			return res.status(200).json({
 				status: 200,
 				message: 'Got all',
-				data: {
-					attrs: req.body,
-					recipes,
-				},
+				data: recipes,
 			})
 		} catch(err) {
 			// console.log(err);

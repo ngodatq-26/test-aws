@@ -20,7 +20,10 @@ const bookSchema = new Schema({
 			},
 		}
 	],
-	author_id: Schema.Types.ObjectId,
+	author_id: {
+		type: Schema.Types.ObjectId,
+		required: true,
+	},
 });
 
 // STATIC
@@ -32,8 +35,8 @@ bookSchema.static('getOne', async function(id) {
 	return await this.findById(mongoose.Types.ObjectId(id));
 });
 
-bookSchema.static('createOne', async function(attrs) {
-	const book = new this(attrs);
+bookSchema.static('createOne', async function(attrs, user) {
+	const book = new this({...attrs, author_id: user._id});
 	await book.save();
 	return book;
 });

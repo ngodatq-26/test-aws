@@ -5,7 +5,7 @@ const authMiddleware = require('../middlewares/Auth.Middleware');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'src/storage');
+        cb(null, 'src/resources/uploads/files');
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + '.jpg';

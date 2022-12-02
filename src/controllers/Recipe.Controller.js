@@ -1,15 +1,19 @@
 const { Recipe } = require('../models/Recipe.Schema');
 const { validationResult } = require("express-validator");
+const { RequestUser } = require('../utils/RequestUser');
 // const config = require('../config/Config.Env');
 
 module.exports = {
 	getAll: async (req, res, next) => {
 		try {
-			const recipes = await Recipe.getAll();
+			const recipes = await Recipe.getAll(req.body);
 			return res.status(200).json({
 				status: 200,
 				message: 'Got all',
-				data: recipes,
+				data: {
+					attrs: req.body,
+					recipes,
+				},
 			})
 		} catch(err) {
 			// console.log(err);
@@ -60,7 +64,8 @@ module.exports = {
 				});
 			}
 
-			const recipe = await Recipe.createOneRecipe(req.body);
+			const user = await RequestUser(req);
+			const recipe = await Recipe.createOneRecipe(req.body, user);
 
 			return res.status(200).json({
 				status: 200,
@@ -73,7 +78,7 @@ module.exports = {
 			console.log(err)
 			return res.status(400).json({
                 status: 400,
-                message: err,
+                message: attributes,
                 data: null,
             });
 		}
@@ -89,15 +94,25 @@ module.exports = {
 					data: null,
 				});
 			}
-
+			const user = await RequestUser(req);
 			const id = req.params.id;
-			const recipe = await Recipe.updateOneRecipe(id, req.body);
+			const recipe = await Recipe.getOneRecipe(id);
+			if (user.role !== 1 && user._id != recipe.author_id) {
+				return res.status(401).json({
+					status: 401,
+					message: 'You are not authorized',
+					data: {
+					},
+				})
+			}
+
+			const new_recipe = await Recipe.updateOneRecipe(id, req.body);
 
 			return res.status(200).json({
 				status: 200,
 				message: 'Updated successfully',
 				data: {
-					recipe: recipe,
+					recipe: new_recipe,
 				},
 			});
 		} catch(err) {
@@ -120,15 +135,25 @@ module.exports = {
 				});
 			}
 
+			const user = await RequestUser(req);
 			const id = req.params.id;
+			const recipe = await Recipe.getOneRecipe(id);
+			if (user.role !== 1 && user._id != recipe.author_id) {
+				return res.status(401).json({
+					status: 401,
+					message: 'You are not authorized',
+					data: {
+					},
+				})
+			}
 
-			const recipe = await Recipe.deleteOneRecipe(id);
+			const deleted_recipe = await Recipe.deleteOneRecipe(id);
 
 			return res.status(200).json({
 				status: 200,
 				message: 'Deleted successfully',
 				data: {
-					recipe: recipe,
+					recipe: deleted_recipe,
 				},
 			});
 		} catch(err) {

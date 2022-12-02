@@ -53,7 +53,7 @@ module.exports = {
 		}
 	},
 
-	createOne: async (req, res, next) => {
+	like: async (req, res, next) => {
 		try {
 			const errors = validationResult(req);
 			if (!errors.isEmpty()) {
@@ -64,10 +64,36 @@ module.exports = {
 				});
 			}
 
-			const like = await Like.createOne(req.body);
+			const like = await Like.like(req.body);
 			return res.status(200).json({
 				status: 200,
-				message: 'Created successfully',
+				message: 'Liked successfully',
+				data: like,
+			});
+		} catch(err) {
+			return res.status(400).json({
+				status: 400,
+				message: err,
+				data: null,
+			});
+		}
+	},
+
+	unlike: async (req, res, next) => {
+		try {
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return res.status(400).json({
+					status: 400,
+					message: errors.array(),
+					data: null,
+				});
+			}
+
+			const like = await Like.unlike(req.body);
+			return res.status(200).json({
+				status: 200,
+				message: 'Unliked successfully',
 				data: like,
 			});
 		} catch(err) {

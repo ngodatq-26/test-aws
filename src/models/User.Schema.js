@@ -11,6 +11,12 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  role: {
+    type: Number,
+    enum: [ 0, 1 ],
+    default: 0,
+    required: true,
+  },
   phone: {
     type: Number,
     default: null,

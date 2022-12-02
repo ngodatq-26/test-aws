@@ -10,7 +10,9 @@ const commentSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		default: null,
 	},
-	object_id: Schema.Types.ObjectId,
+	object_id: {
+		type: Schema.Types.ObjectId,
+	}
 });
 
 // STATIC

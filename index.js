@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb',extended : true}));
 app.use(express.static(`${__dirname}/src/resources/public`));
-app.use(express.static(`${__dirname}/src/storage`))
+app.use(express.static(`${__dirname}/src/resources/uploads/files`));
 
 app.set('views', `${__dirname}/src/resources/views`);
 app.set('view engine', 'ejs');

@@ -58,7 +58,8 @@ module.exports = (function() {
             getOne: '/:id',
             updateOne: '/:id',
             deleteOne: '/:id',
-            createOne: '',
+            like: '/like',
+            unlike: '/unlike'
         },
         comment: {
             getAll: '',

@@ -11,7 +11,7 @@ const newsSchema = new Schema({
 	pictures: [ String ],
 	author_id: {
 		type: Schema.Types.ObjectId,
-		// required: true,
+		required: true,
 	},
 });
 

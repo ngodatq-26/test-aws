@@ -13,7 +13,7 @@ module.exports = {
 
     //app_main
     APP_PORT : process.env.APP_PORT,
-    APP_DOMAIN : process.env.APP_DOMAIN,
+    DOMAIN_APP: process.env.DOMAIN_APP,
 
     //jwt 
     REFRESH_SECRET_JWT_KEY: process.env.REFRESH_SECRET_JWT_KEY,
